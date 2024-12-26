@@ -9,7 +9,7 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play who-stole-my-bone.</tw-noscript></noscript></tw-story>
-<tw-storydata name="who-stole-my-bone" startnode="1" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="D1581E8D-E79D-450C-B75A-58975CAEE9E6" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-story {
+<tw-storydata name="who-stole-my-bone" startnode="1" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="D1581E8D-E79D-450C-B75A-58975CAEE9E6" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-story {
   font-family: monaco, monospace, helvetica, sans-serif;
   font-size:150%;
   color: black;
@@ -17,6 +17,21 @@
 }
 tw-link {
   color: orange;
+}
+.full-width-borders p {
+  color: white;
+}
+.full-width-borders {
+  height: 110vh; 
+  /* also subtract section padding (1.5rem) */
+  margin: -8rem -601.5rem;
+  /* add back section padding (1.5rem) */
+  padding: 0rem;
+  background: black;
+  /* border has to be solid, not RGBa */
+  /* 9600px or equiv (600rem = 9600/16) */
+  border-left: 600rem solid black;
+  border-right: 600rem solid black;
 }</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="newNew" tags="" position="725,350" size="100,100">
 &lt;a data-passage=&quot;Start&quot; class=&quot;link-internal link-image&quot;&gt;
 &lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/ext-img/title.gif&#39; /&gt;
@@ -170,19 +185,31 @@ Listen Pum Pum, I get that you hate me and don&#39;t want to be alone anymore, b
 You know what, shithead, I&#39;m tired of being Mr. Nice Guy™! Screw you and your stupid plan, Pum Pum! Your name is stupid too, it sounds like Bum Bum. Yeah, you&#39;re a stinky Bum Bum who deserves to be lonely!!
 
 [[Damn, Spudz]]</tw-passagedata><tw-passagedata pid="55" name="Couldn&#39;t have said it better" tags="" position="275,6225" size="100,100">&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/hug.gif&#39; /&gt;
-So what do you say? Wanna hug it out and start over with a [[clean-&gt;pum-kills]] slate?</tw-passagedata><tw-passagedata pid="56" name="end_pum" tags="" position="500,6425" size="100,100">&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/kill.gif&#39; /&gt;
+So what do you say? Wanna hug it out and start over with a [[clean-&gt;pum-kills]] slate?</tw-passagedata><tw-passagedata pid="56" name="end_pum" tags="" position="500,6425" size="100,100">
+ &lt;div class=&quot;full-width-borders&quot;&gt;&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/kill.gif&#39; /&gt;
+ &lt;p&gt;
 You died a fool, Spudz. A happy little fool. 
+&lt;/p&gt;
+&lt;/div&gt;
 (live: 3s)[(goto: &quot;newNew&quot;)]</tw-passagedata><tw-passagedata pid="57" name="Damn, Spudz" tags="" position="600,6225" size="100,100">&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/pum-pum.gif&#39; /&gt;
 Pum Pum: You really think you will do any ounce of damage with your childish [[insults]]?</tw-passagedata><tw-passagedata pid="58" name="insults" tags="" position="725,6350" size="100,100">&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/closer.gif&#39; /&gt;
 Pum Pum: I want you to suffer, Spudz, to tas
-Pum Pum: You&#39;ll never conquer me, Spudz, you will always be the idiotic dog who can&#39;t distinguish friend from foe. You die today, Spudz, it is your inevitable [[fate-&gt;pum-dies]].</tw-passagedata><tw-passagedata pid="59" name="fate" tags="" position="725,6475" size="100,100">&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/kill2.gif&#39; /&gt;
+Pum Pum: You&#39;ll never conquer me, Spudz, you will always be the idiotic dog who can&#39;t distinguish friend from foe. You die today, Spudz, it is your inevitable [[fate-&gt;pum-dies]].</tw-passagedata><tw-passagedata pid="59" name="fate" tags="" position="725,6475" size="100,100"> &lt;div class=&quot;full-width-borders&quot;&gt;&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/kill2.gif&#39; /&gt;
+  &lt;p&gt;
 You should have never underestimated me, Pum Pum.
+&lt;/p&gt;
+&lt;/div&gt;
 (live: 3s)[(goto: &quot;newNew&quot;)]
 </tw-passagedata><tw-passagedata pid="60" name="new_sound" tags="" position="725,4950" size="100,100">&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/sound.gif&#39; /&gt;
-What&#39;s that [[sound]]?</tw-passagedata><tw-passagedata pid="61" name="pum-kills" tags="" position="325,6450" size="100,100">&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/dead.gif&#39; /&gt;
+What&#39;s that [[sound]]?</tw-passagedata><tw-passagedata pid="61" name="pum-kills" tags="" position="325,6450" size="100,100">
+ &lt;div class=&quot;full-width-borders&quot;&gt;&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/dead.gif&#39; /&gt;
+ &lt;/div&gt;
 
-(live: 3s)[(goto: &quot;end_pum&quot;)]</tw-passagedata><tw-passagedata pid="62" name="pum-dies" tags="" position="850,6350" size="100,100">&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/dead2.gif&#39; /&gt;
-(live: 3s)[(goto: &quot;fate&quot;)]</tw-passagedata><tw-passagedata pid="63" name="pum" tags="" position="925,5375" size="100,100">&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/pum-pum.gif&#39; /&gt;
+(live: 3s)[(goto: &quot;end_pum&quot;)]</tw-passagedata><tw-passagedata pid="62" name="pum-dies" tags="" position="850,6350" size="100,100"> &lt;div class=&quot;full-width-borders&quot;&gt;
+&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/dead2.gif&#39; /&gt;
+&lt;/div&gt;
+(live: 3s)[(goto: &quot;fate&quot;)]
+</tw-passagedata><tw-passagedata pid="63" name="pum" tags="" position="925,5375" size="100,100">&lt;img src=&#39;https://html-classic.itch.zone/html/6442057/Who%20Stole%20My%20Bone%20-%20for%20testing/images/pum-pum.gif&#39; /&gt;
 Pum Pum: You&#39;ve finally figured it out. You do have some [[brains]] in you, after all.</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
