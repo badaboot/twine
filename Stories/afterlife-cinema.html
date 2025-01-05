@@ -9,7 +9,7 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play afterlife-cinema.</tw-noscript></noscript></tw-story>
-<tw-storydata name="afterlife-cinema" startnode="39" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="6DC4030F-4650-4AE7-A95A-30AF788A4FD0" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-story {
+<tw-storydata name="afterlife-cinema" startnode="35" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="6DC4030F-4650-4AE7-A95A-30AF788A4FD0" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-story {
   font-family: monaco, monospace, helvetica, sans-serif;
   font-size:150%;
   color: black;
@@ -20,6 +20,9 @@ tw-link {
 }
 .full-width-borders p {
   color: white;
+}
+.flex {
+  display: flex;
 }
 .full-width-borders {
   height: 110vh; 
@@ -32,184 +35,221 @@ tw-link {
   /* 9600px or equiv (600rem = 9600/16) */
   border-left: 600rem solid black;
   border-right: 600rem solid black;
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="begin" tags="" position="725,275" size="100,100">You’re a rookie guide in the afterlife. To get promoted you need to reincarnate three souls in a movie theater. 
-
-It’s all or nothing; either all three are reincarnated or the promotion&#39;s moot.
-
+}
+.full-width-borders img {
+  margin-top: 10%;
+}
+.large {
+  height: 80vh;
+}
+.small {
+  max-width: 300px;
+}
+tw-sidebar {
+  z-index: 20;
+  color: orange;
+}
+img {
+display: block;
+  margin: auto;
+  width: 100%;
+max-width: 600px;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="begin" tags="" position="725,275" size="100,100">&lt;img class=&#39;small&#39; src=&#39;./afterlife-cinema/img/mc-up.jpg&#39;  alt=&#39;cat looks up&#39;/&gt;
+You’re a rookie guide in the afterlife. To get promoted you need to reincarnate three souls at once. You&#39;ve never done this before.
  [[Let&#39;s go-&gt;question]]!
 [[ Nah, I&#39;m good-&gt;really]].
-</tw-passagedata><tw-passagedata pid="2" name="question" tags="" position="725,475" size="100,100">You&#39;re in Afterlife Cinema. You&#39;ve been here before.
+</tw-passagedata><tw-passagedata pid="2" name="question" tags="" position="725,475" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/map.jpg&#39;  alt=&#39;cat map of theater&#39;/&gt;
+You clients are in Afterlife Cinema. They&#39;re easy to spot; they reverted to their favorite item upon death.
 
-Your clients were easy to spot; only the guests wore shrouds.
-
-
-[[Ask client 1-&gt;Ask target 1]]
-
-[[Ask client 2-&gt;Ask target 2]]
-
-[[Ask client 3-&gt;Ask target 3]]
-
+[[Ask client 1 ★-&gt;Halley]]
+[[Ask client 2 ▮-&gt;GB]]
+[[Ask client 3 ⬤-&gt;Caine]]
 [[Question all three together]]
 
-</tw-passagedata><tw-passagedata pid="3" name="Ask target 1" tags="" position="650,650" size="100,100">Hello miss. I can help with your reincarnation. Can you [[confirm your identity and role-&gt;Halley]]?</tw-passagedata><tw-passagedata pid="4" name="Halley" tags="" position="475,675" size="100,100">Halley: My name is Halley and I make popcorn. 
-
-Halley: It&#39;s fine here. Why would I [[ want to leave-&gt;question]]?</tw-passagedata><tw-passagedata pid="5" name="Ask target 2" tags="" position="850,600" size="100,100">Hello mister. I can help with [[your reincarnation-&gt;GB]]. Please confirm your identity and role.</tw-passagedata><tw-passagedata pid="6" name="GB" tags="" position="1000,650" size="100,100">GB: I&#39;m GB, an usher. I usher ghosts out of the theater.
-
-GB: Leave me alone. I don’t want to be [[reincarnated-&gt;question]].</tw-passagedata><tw-passagedata pid="7" name="Question all three together" tags="" position="750,850" size="100,100">Hello all. I’m your afterlife guide. I’m tasked with helping you reincarnate. For that I need to know [[how you got here]].
-</tw-passagedata><tw-passagedata pid="8" name="how you got here" tags="" position="500,925" size="100,100">Caine: A guide cat? Don’t they usually have guide dogs?
-
-You: I’ve lived nine lives; I&#39;m experienced. You’ll do well to [[listen to me-&gt;follow my instructions]].
-</tw-passagedata><tw-passagedata pid="9" name="follow my instructions" tags="" position="625,1075" size="100,100">GB: I&#39;ll go first. 
-
-GB: Hello all. My name is GB. I named myself after GameBoy, my [[favorite console]]. 
-</tw-passagedata><tw-passagedata pid="10" name="favorite console" tags="" position="625,1200" size="100,100">GB: I was born in Great Britain in the top 1%; my family&#39;s related to the King. They only cared about making money but I sucked at it.
-
-GB: They hated everything I did and I hated them back. I did things to spite them, including writing [[love poems]] in seventh grade.
-</tw-passagedata><tw-passagedata pid="11" name="love poems" tags="" position="625,1325" size="100,100">&lt;div class=&#39;full-width-borders&#39;&gt; 
-&lt;p&gt;GB: At college I took some ecstasy and overdosed. It might&#39;ve been laced with something else. It was a [[round one]], like you. &lt;-- looks at Caine&lt;/p&gt;
+</tw-passagedata><tw-passagedata pid="3" name="Halley" tags="" position="475,675" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/h-intro.jpg&#39;  alt=&#39;halley at popcorn stand&#39;/&gt;
+Halley: My name is Halley and I make popcorn. 
+Halley: It&#39;s fine here. Why would I [[ want to leave-&gt;question]]?</tw-passagedata><tw-passagedata pid="4" name="GB" tags="" position="1000,650" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-down.jpg&#39;  alt=&#39;gameboy boy&#39;/&gt;
+GB: I&#39;m GB, an usher. I usher ghosts out of the theater.
+GB: Leave me alone. I don’t want to be [[reincarnated-&gt;question]].</tw-passagedata><tw-passagedata pid="5" name="Question all three together" tags="" position="750,850" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/mc-talk.jpg&#39;  alt=&#39;cat guide talks&#39;/&gt;
+Hello all. I’m your afterlife guide. I’m tasked with helping you reincarnate. For that I need to know [[how you got here]].
+</tw-passagedata><tw-passagedata pid="6" name="how you got here" tags="" position="500,925" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/c-mc.jpg&#39;  alt=&#39;caine talks to mc&#39;/&gt;
+Caine: A guide cat? Don’t they usually have guide dogs?
+You: I&#39;m experienced; I&#39;ve lived nine lives. You&#39;d do well to [[listen to me-&gt;follow my instructions]].
+</tw-passagedata><tw-passagedata pid="7" name="follow my instructions" tags="" position="625,1075" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-talk2.jpg&#39;  alt=&#39;gameboy talks&#39;/&gt;
+GB: I&#39;ll go first. 
+GB: Hello all. My name is GB. I named myself after Game Boy, my [[favorite console]]. 
+</tw-passagedata><tw-passagedata pid="8" name="favorite console" tags="" position="625,1200" size="100,100">&lt;div class=&#39;full-width-borders&#39;&gt; 
+&lt;img src=&#39;./afterlife-cinema/img/g-hate.jpg&#39;  alt=&#39;GB surrounded by family who hates him&#39;/&gt;
+&lt;p&gt;GB: I was born in Great Britain in the top 1%; my family&#39;s related to the King. They only cared about making money but I sucked at it.
+GB: They hated everything I did , so I did things to spite them, including writing [[love poems]] in seventh grade.&lt;/p&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="love poems" tags="" position="625,1325" size="100,100">&lt;div class=&#39;full-width-borders&#39;&gt; 
+&lt;img src=&#39;./afterlife-cinema/img/g-die1.jpg&#39;  alt=&#39;GB lay dead in vomit&#39;/&gt;
+&lt;p&gt;GB: At college I took some ecstasy and accidentally overdosed. I didn&#39;t want to die. It was a [[round one]], like you. &lt;-- looks at Caine&lt;/p&gt;
 &lt;/div&gt;
-</tw-passagedata><tw-passagedata pid="12" name="round one" tags="" position="625,1450" size="100,100">Caine: Hey, I&#39;m a breath mint! 
+</tw-passagedata><tw-passagedata pid="10" name="round one" tags="" position="625,1450" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/c-talk.jpg&#39;  alt=&#39;round candy talks&#39;/&gt;
+Caine: Hey, I&#39;m a [[breath mint]]! 
 
-Caine: I was born in the US and was a teacher. I taught two jobs to pay bills: one at community college, and another at a [[elementary school]].
-</tw-passagedata><tw-passagedata pid="13" name="elementary school" tags="" position="625,1575" size="100,100">&lt;div class=&#39;full-width-borders&#39;&gt;
+</tw-passagedata><tw-passagedata pid="11" name="elementary school" tags="" position="625,1575" size="100,100">&lt;div class=&#39;full-width-borders&#39;&gt;
+&lt;img src=&#39;./afterlife-cinema/img/c-die1.jpg&#39;  alt=&#39;Caine was shot&#39;/&gt;
 &lt;p&gt;Caine: Where I was gunned down at a [[school shooting]]. &lt;/p&gt;
 &lt;/div&gt;
 
-</tw-passagedata><tw-passagedata pid="14" name="school shooting" tags="" position="625,1700" size="100,100">You: And you, miss? 
+</tw-passagedata><tw-passagedata pid="12" name="school shooting" tags="" position="625,1700" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/h-shrug.jpg&#39;  alt=&#39;star shrugs&#39;/&gt;
+You: And you, miss? 
 
 Halley: I don’t remember anything.
 
 You: What do you [[remember]]?
 
-</tw-passagedata><tw-passagedata pid="15" name="remember" tags="" position="625,1825" size="100,100">Halley: I’m named after a [[shooting star]]. That’s all I remember. </tw-passagedata><tw-passagedata pid="16" name="shooting star" tags="" position="875,1875" size="100,100">This smells fishy... You leave them alone in the supply closet.
-
+</tw-passagedata><tw-passagedata pid="13" name="remember" tags="" position="625,1825" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/h-shrug.jpg&#39;  alt=&#39;star shrugs&#39;/&gt;
+Halley: I’m named after a [[shooting star]]. That’s all I remember. </tw-passagedata><tw-passagedata pid="14" name="shooting star" tags="" position="875,1875" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/c-chase-mc.jpg&#39;  alt=&#39;Caine chases cat&#39;/&gt;
+This smells fishy... You leave them alone.
 Caine chases after you.
-
 Caine: I will help. I want to be reincarnated! 
 
 [[Look for GB]]
-
 [[Follow Caine]]
 
-</tw-passagedata><tw-passagedata pid="17" name="Look for GB" tags="" position="650,1975" size="100,100">GB stood in the theater showing business movies. He looks at the audience; the ghosts wore indistinguishable white shrouds. 
+</tw-passagedata><tw-passagedata pid="15" name="Look for GB" tags="" position="650,1975" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/ghosts.jpg&#39;  alt=&#39;crowd of ghosts in movie theater&#39;/&gt;
+You found GB in a theater showing business movies. He&#39;s gazing at the audience.
 
 GB: My ancestors were great businessmen; they might be here.
-
 You: Why don’t you [[talk to them]]?
-</tw-passagedata><tw-passagedata pid="18" name="Follow Caine" tags="" position="1000,2025" size="100,100">You overheard Caine conversing with Halley at the popcorn stand.
+</tw-passagedata><tw-passagedata pid="16" name="Follow Caine" tags="" position="1000,2025" size="100,100">&lt;img class=&#39;small&#39; src=&#39;./afterlife-cinema/img/c-h-talk.jpg&#39;  alt=&#39;Caine and Halley look cozy together&#39;/&gt;
+You overheard Caine conversing with Halley at the popcorn stand.
 
-Halley: I write fluffy romance to calm me and to block out memories. My memories hurt me. They give me [[nightmares]]…
-</tw-passagedata><tw-passagedata pid="19" name="talk to them" tags="" position="625,2125" size="100,100">GB: It&#39;s bad manners to talk to guests. We are here to serve them, not the other way around.
+Halley: I write romance to calm me and to block out memories. My memories hurt me. They give me [[nightmares-&gt;befriend her]]…
+</tw-passagedata><tw-passagedata pid="17" name="talk to them" tags="" position="625,2125" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-talk2.jpg&#39;  alt=&#39;GB looking uppity&#39;/&gt;
+GB: It&#39;s bad manners to talk to guests. We are here to serve them, not the other way around.
 
-You: But if they&#39;re [[your ancestors]]...</tw-passagedata><tw-passagedata pid="20" name="nightmares" tags="" position="900,2250" size="100,100">Caine whispers to you: Halley uses her memories each night to make popcorn. They smell like hopes and dreams from her writing.
+You: But if they&#39;re [[your ancestors]]...</tw-passagedata><tw-passagedata pid="18" name="befriend her" tags="" position="1075,2425" size="100,100">You play a cute game with Halley to calm her mind.
+Halley felt better. She went to the closet to wait for her memories [[to return]]. 
+&lt;img src=&#39;./afterlife-cinema/img/map.jpg&#39;  alt=&#39;map of theater&#39;/&gt;</tw-passagedata><tw-passagedata pid="19" name="to return" tags="" position="850,2425" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/h-b.jpg&#39;  alt=&#39;Halley talks to GB&#39;/&gt;
+At 3 AM Halley emerged.
 
-Caine: She likes puzzles. We can play puzzles with her to [[befriend her]].
-</tw-passagedata><tw-passagedata pid="21" name="befriend her" tags="" position="1075,2425" size="100,100">You play a cute game with Halley to calm her mind.
+Halley: I received your love letters. Your handwriting was horrible, and you [[misquoted Shakespeare-&gt;Halley death]].
 
-Halley felt better. She went to the supply closet to wait for her memories [[to return]]. </tw-passagedata><tw-passagedata pid="22" name="to return" tags="" position="850,2425" size="100,100">At 3 AM the bell tolls and Halley  came out of the room.
 
-Halley -&gt; GB: you wrote love letters to me. Your handwriting was [[horrible-&gt;Halley death]].
-
-GB: 🙁
-</tw-passagedata><tw-passagedata pid="23" name="already died" tags="" position="750,2700" size="100,100">Halley: I dreamed of a script-writing career and moved to Los Angeles and took a writing course. To pay the bills I worked at a [[fast food place]]...
-</tw-passagedata><tw-passagedata pid="24" name="held hostage" tags="" position="650,2850" size="100,100">Caine: Wait, were you a student of mine? I was aghast when they found your body…
-
+</tw-passagedata><tw-passagedata pid="20" name="died" tags="" position="750,2700" size="100,100">&lt;div class=&#39;full-width-borders&#39;&gt;
+&lt;img src=&#39;./afterlife-cinema/img/h-die1.jpg&#39;  alt=&#39;shadow points gun at Halley&#39;/&gt;
+&lt;p&gt;Halley: I pursued script-writing and moved to Los Angeles. While working at a restaurant I was [[held-up at gunpoint-&gt;held hostage]]...&lt;/p&gt;
+&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="21" name="held hostage" tags="" position="650,2850" size="100,100">Caine: Wait, were you a student of mine? I was aghast when they found your body…
 Halley: You were my teacher in the script-writing class? I had a [[crush on you]]…
+&lt;img class=&#39;small&#39; src=&#39;./afterlife-cinema/img/h-love.jpg&#39;  alt=&#39;Halley with heart eyes&#39;/&gt;
+</tw-passagedata><tw-passagedata pid="22" name="crush on you" tags="" position="600,2975" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/h-shrug.jpg&#39;  alt=&#39;Halley the star shrugs&#39;/&gt;
+Halley: I don’t want to reincarnate because bad things will happen. I’m tired of being poor, and most likely I’ll end up [[poor again]].
 
-Caine: :) 
-</tw-passagedata><tw-passagedata pid="25" name="crush on you" tags="" position="650,3000" size="100,100">Halley: I don’t want to reincarnate because bad things will happen. I’m tired of being poor, and most likely I’ll end up being poor again.
 
-[[Play cute game with Halley to calm her]]
-</tw-passagedata><tw-passagedata pid="26" name="Play cute game with Halley to calm her" tags="" position="825,3025" size="100,100">Now Halley&#39;s onboard, you just need to convince GB.
-
+</tw-passagedata><tw-passagedata pid="23" name="convince-GB" tags="" position="825,3025" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-game.jpg&#39;  alt=&#39;GB at computer&#39;/&gt;
+While Halley&#39;s deciding you still need to convince GB.
 You and Caine found GB in the supplies closet; he&#39;s making games on a computer.
 
 GB: Why don&#39;t you play a game that I made? If you win [[I&#39;ll reincarnate]]. 
 
-</tw-passagedata><tw-passagedata pid="27" name="I&#39;ll reincarnate" tags="" position="750,3200" size="100,100">You win and GB relents. “Maybe respawning is [[not so bad]].”</tw-passagedata><tw-passagedata pid="28" name="not so bad" tags="" position="750,3325" size="100,100">The Cinema’s owner blocks the exit.
-
+</tw-passagedata><tw-passagedata pid="24" name="I&#39;ll reincarnate" tags="" position="750,3200" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-talk2.jpg&#39;  alt=&#39;GB looking uppity&#39;/&gt;
+You win and GB relents. “Maybe respawning is [[not so bad]].”</tw-passagedata><tw-passagedata pid="25" name="not so bad" tags="" position="750,3325" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/exit.jpg&#39;  alt=&#39;door talks&#39;/&gt;
+The Cinema’s owner blocks the exit.
 Owner: Halley’s memories are a special sauce for the popcorn; it&#39;s what the theater is known for. She has to remain.
 
 [[Is this negotiable-&gt;No]]?
-
-[[Oh shucks-&gt;game]]!</tw-passagedata><tw-passagedata pid="29" name="game" tags="" position="750,3450" size="100,100">GB: I can program an AI that analyzes Halley’s writing to create something similar.
-
+[[Oh shucks-&gt;game]]!</tw-passagedata><tw-passagedata pid="26" name="game" tags="" position="750,3450" size="100,100">GB: I can program an AI that analyzes Halley’s writing to create something similar.
 You help to [[put the program together]].
-</tw-passagedata><tw-passagedata pid="30" name="put the program together" tags="" position="750,3575" size="100,100">Satisfied, the theater owner grants you permission to leave. 
-
-It spits out a [[Christmas card]]. </tw-passagedata><tw-passagedata pid="31" name="Christmas card" tags="" position="500,3725" size="100,100">The reindeer in the Christmas card springs to life. 
-
+</tw-passagedata><tw-passagedata pid="27" name="put the program together" tags="" position="750,3575" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/postcard.jpg&#39;  alt=&#39;postcard with reindeer and chimney&#39;/&gt;
+Satisfied, the theater owner grants you permission to leave. 
+It spits out a [[postcard-&gt;Christmas card]]. </tw-passagedata><tw-passagedata pid="28" name="Christmas card" tags="" position="500,3725" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/deer.jpg&#39;  alt=&#39;postcard with reindeer and chimney&#39;/&gt;
+The reindeer in the postcard springs to life. 
 Reindeer: I&#39;m in charge of reincarnating souls. Your souls have healed and you&#39;re ready to move on. 
-
-During your new life you&#39;ll forget your past lives.
-
+Jump in the chimney if you&#39;re ready, but you&#39;ll forget your past lives.
 If you have any [[last words]] for each other, now is the time.
 
-</tw-passagedata><tw-passagedata pid="32" name="cringe" tags="" position="500,4000" size="100,100">Caine-&gt;Halley: for what it&#39;s worth, I liked you too, and fantasized about a life together.
-
-Halley: That&#39;s funny. I thought the same about you... 
+</tw-passagedata><tw-passagedata pid="29" name="cringe" tags="" position="500,4000" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/c-h-talk.jpg&#39;  class=&#39;small&#39; alt=&#39;Caine talks to Halley&#39;/&gt;
+Caine: I liked you too Halley, but I was your teacher...
+Halley: That restriction&#39;s gone. My best life starts with you.
 
 [[Interrupt]].
 [[Ask GB what he thinks]].
-[[Let them have their moment]].</tw-passagedata><tw-passagedata pid="33" name="end" tags="" position="750,4075" size="100,100">They all turn into babies and I get my promotion + fish toy :) 
+[[Let them have their moment]].</tw-passagedata><tw-passagedata pid="30" name="end" tags="" position="750,4075" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/ideal-end.jpg&#39;  alt=&#39;Happy cat with fish toy&#39;/&gt;
+I get my promotion + fish toy :) 
 
 THE END
 
 [[Restart-&gt;start]]
-</tw-passagedata><tw-passagedata pid="34" name="Ask target 3" tags="" position="1075,575" size="100,100">Hello mister. I can help with [[your reincarnation-&gt;Caine]]. You are?</tw-passagedata><tw-passagedata pid="35" name="Caine" tags="" position="1200,700" size="100,100">Caine: I&#39;m Caine, the projector attendant. I&#39;m tired of watching the same movie every night...
+</tw-passagedata><tw-passagedata pid="31" name="Caine" tags="" position="1200,700" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/c-intro.jpg&#39;  alt=&#39;caine the round candy&#39;/&gt;
+Caine: I&#39;m Caine, the projector attendant. I&#39;m tired of watching the same movie every night...
+Caine: I want to be [[reincarnated-&gt;question]]. How does it work?</tw-passagedata><tw-passagedata pid="32" name="Halley death" tags="" position="875,2575" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/h-mom.jpg&#39;  alt=&#39;Halley mom jumps up in anger&#39;/&gt;
+&lt;p&gt;Halley: My mother hounded me about those love letters. &quot;You can marry more in five minutes than you’ll make in your entire life,&quot; she said, even though GB [[already passed away-&gt;died]]. 
+&lt;/p&gt;
 
-Caine: I want to be [[reincarnated-&gt;question]]. How does it work?</tw-passagedata><tw-passagedata pid="36" name="Halley death" tags="" position="875,2575" size="100,100">Halley: My mother hounded me about those love letters. &quot;You can marry more in five minutes than you’ll make in your entire life,&quot; she said, even though GB [[already died]]. 
-</tw-passagedata><tw-passagedata pid="37" name="No" tags="" position="875,3450" size="100,100">Owner: [[No-&gt;not so bad]]</tw-passagedata><tw-passagedata pid="38" name="last words" tags="" position="625,3850" size="100,100">GB -&gt; Halley: It’s too late to say this now, but I dreamed about us being together during my darkest moments.
+</tw-passagedata><tw-passagedata pid="33" name="No" tags="" position="875,3450" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/exit.jpg&#39;  alt=&#39;door talks&#39;/&gt;
+Owner: [[No-&gt;not so bad]].
+</tw-passagedata><tw-passagedata pid="34" name="last words" tags="" position="625,3850" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-h.jpg&#39;  alt=&#39;GB talks to Halley&#39;/&gt;
+GB: It’s too late to say this now, but I dreamed about us being together during my darkest moments.
+Halley: I enjoyed reading your letters, even though [[you misquoted Shakespeare-&gt;cringe]] :) 
+</tw-passagedata><tw-passagedata pid="35" name="start" tags="" position="1050,250" size="100,100">&lt;div class=&#39;full-width-borders&#39;&gt;
+[[&lt;img class=&#39;large&#39; src=&#39;./afterlife-cinema/img/start.jpg&#39;  alt=&#39;drawing of a movie theater&#39;/&gt;-&gt;begin]]
+&lt;/div&gt;
 
-Halley: I enjoyed reading your letters, even though [[you misquoted Shakespeare]] :) 
-</tw-passagedata><tw-passagedata pid="39" name="start" tags="" position="1050,250" size="100,100">Afterlife Cinema
-[[Start-&gt;begin]]</tw-passagedata><tw-passagedata pid="40" name="fast food place" tags="" position="875,2825" size="100,100">&lt;div class=&#39;full-width-borders&#39;&gt;
-&lt;p&gt;Halley: where I was robbed at gunpoint and [[held hostage]].&lt;/p&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="41" name="really" tags="" position="850,400" size="100,100">A promotion comes with perks like more fish toys.
-[[I can use another fishy :)-&gt;question]].</tw-passagedata><tw-passagedata pid="42" name="your ancestors" tags="" position="600,2300" size="100,100">GB: They&#39;re captains int their industry, including arms-dealing and banking. They&#39;d think I&#39;m a disgrace.
+</tw-passagedata><tw-passagedata pid="36" name="really" tags="" position="850,400" size="100,100">&lt;img class=&#39;small&#39; src=&#39;./afterlife-cinema/img/mc-fish.jpg&#39;  alt=&#39;cat thinks of fish&#39;/&gt;
+A promotion comes with perks like more fish toys.
+[[I can use another fishy :)-&gt;question]].</tw-passagedata><tw-passagedata pid="37" name="your ancestors" tags="" position="600,2300" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-talk2.jpg&#39;  alt=&#39;GB looking uppity&#39;/&gt;
+GB: They&#39;re captains int their industry, including arms-dealing and banking. They&#39;d think I&#39;m a disgrace.
 
 [[Have you tried...-&gt;enough]]
 [[Really? Maybe they secretly like love-letter writers-&gt;enough]].
 
 
-</tw-passagedata><tw-passagedata pid="43" name="enough" tags="" position="625,2450" size="100,100">GB: Enough. Leave me alone!
+</tw-passagedata><tw-passagedata pid="38" name="enough" tags="" position="625,2450" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-talk.jpg&#39;  alt=&#39;GB being angry&#39;/&gt;
+GB: Enough. Leave me alone!
 
-You: Ok, you be you.
+[[Return to Caine-&gt;Follow Caine]].</tw-passagedata><tw-passagedata pid="39" name="Interrupt" tags="" position="500,4175" size="100,100">&lt;img class=&#39;small&#39; src=&#39;./afterlife-cinema/img/mc-talk.jpg&#39;  alt=&#39;Cat guide talks&#39;/&gt;
+Hey, this is cute and all, but your reincarnation&#39;s holding up my promotion. Can y&#39;all just [[jump in the chimney already-&gt;get a move on]]?
 
-[[Return to Caine-&gt;Follow Caine]].</tw-passagedata><tw-passagedata pid="44" name="you misquoted Shakespeare" tags="" position="475,3875" size="100,100">GB: Give me a break. I was [[a teenager-&gt;cringe]]!</tw-passagedata><tw-passagedata pid="45" name="Interrupt" tags="" position="500,4175" size="100,100">Hey, this is cute and all, but my promotion relies on reincarnating all three of you. Can we please [[get a move on]]?
+</tw-passagedata><tw-passagedata pid="40" name="Let them have their moment" tags="" position="625,4175" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/c-h-kiss.jpg&#39; class=&#39;small&#39;  alt=&#39;Caine about to kiss Halley&#39;/&gt;
+Halley: I really enjoyed your writing course. You know what makes a great script...
+Caine: And you&#39;re a great writer. Your writing is full of hope and [[happy endings]].</tw-passagedata><tw-passagedata pid="41" name="happy endings" tags="" position="625,4300" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-mc.jpg&#39;  alt=&#39;GB whispers to MC&#39;/&gt;
+GB whispers to you: Are they talking about the happy-ending in fairy-tales, or...
 
-</tw-passagedata><tw-passagedata pid="46" name="Let them have their moment" tags="" position="625,4175" size="100,100">Halley-&gt;Caine: I really enjoyed your scriptwriting course. You know what makes a great script...
+[[Don&#39;t be absurd! Of course it&#39;s the former-&gt;former2]].
+[[I see your point-&gt;I&#39;m thinking about that too.]].</tw-passagedata><tw-passagedata pid="42" name="I&#39;m thinking about that too." tags="" position="750,4425" size="100,100">&lt;img class=&#39;small&#39; src=&#39;./afterlife-cinema/img/mc-talk.jpg&#39;  alt=&#39;Cat talks&#39;/&gt;
+Although, if your love letters were better written, you would be holding her hands instead of Caine. You would&#39;ve gotten married and her mom would&#39;ve been happy.
 
-Caine: And you&#39;re a great writer. Your writing is full of hope and [[happy endings]].</tw-passagedata><tw-passagedata pid="47" name="happy endings" tags="" position="625,4300" size="100,100">GB whispers to you: Are they talking about the happy-ending in fairy-tales, or...
+GB: Wow, you really hurt [[my feelings-&gt;right]]...
+</tw-passagedata><tw-passagedata pid="43" name="former2" tags="" position="500,4425" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/c-h-ride.jpg&#39;  alt=&#39;Caine and Halley ride off to sunset on bicycle&#39;/&gt;
+You argue with GB  until you realize Caine and Halley were gone.
 
-[[Don&#39;t be absurd! Of course it&#39;s the former.]]
-[[I&#39;m thinking about that too.]]</tw-passagedata><tw-passagedata pid="48" name="I&#39;m thinking about that too." tags="" position="750,4425" size="100,100">Although, if you wrote better love letters, you would be holding hands with her instead of Caine. You could&#39;ve gotten married and her mom would&#39;ve been happy.
-
-GB: Are you trying to pick a fight? [[Come at me]] then!
-</tw-passagedata><tw-passagedata pid="49" name="Don&#39;t be absurd! Of course it&#39;s the former." tags="" position="500,4425" size="100,100">You argue with GB  until you realize Caine and Halley were gone.
-
-Reindeer: They took a motorcycle and [[rode into the sunset]]. </tw-passagedata><tw-passagedata pid="50" name="rode into the sunset" tags="" position="200,4825" size="100,100">There goes your promotion. 
+Reindeer: They rode [[into the sunset-&gt;bad]]. </tw-passagedata><tw-passagedata pid="44" name="bad" tags="" position="200,4825" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/bad-end.jpg&#39;  alt=&#39;Cat cries&#39;/&gt;
+There goes your promotion. 
 
 THE END
 
 [[Restart-&gt;start]]
 
-</tw-passagedata><tw-passagedata pid="51" name="get a move on" tags="" position="400,4300" size="100,100">All: wow, you&#39;re so [[selfish]]!
+</tw-passagedata><tw-passagedata pid="45" name="get a move on" tags="" position="400,4300" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-h-c-angry.jpg&#39;  alt=&#39;All three clients are angry with you&#39;/&gt;
+All: Wow, you&#39;re so [[selfish]]!
 
-</tw-passagedata><tw-passagedata pid="52" name="selfish" tags="" position="375,4425" size="100,100">GB: Come to think of it, I don&#39;t have to reincarnate. I can leave and make games.
+</tw-passagedata><tw-passagedata pid="46" name="selfish" tags="" position="375,4425" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-h-c-happy.jpg&#39;  alt=&#39;Three clients talk among themselves&#39;/&gt;
+GB: Come to think of it, I don&#39;t have to reincarnate. I can stay and make games.
+Caine and Halley: We can stay and live happily ever after.
 
-Caine and Halley: We can go elsewhere and look lovingly into each other&#39;s eyes.
+[[They stayed-&gt;They left]].
 
-[[They left]].
-
-</tw-passagedata><tw-passagedata pid="53" name="They left" tags="" position="225,4550" size="100,100">Being selfish cost you the fish toy.
+</tw-passagedata><tw-passagedata pid="47" name="They left" tags="" position="225,4550" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/bad-end.jpg&#39;  alt=&#39;Cat cries&#39;/&gt;
+Being selfish cost you your promotion.
 
 THE END
 
-[[Restart-&gt;start]]</tw-passagedata><tw-passagedata pid="54" name="Come at me" tags="" position="625,4675" size="100,100">Reindeer: It&#39;s bad practice to fight your client. The[[ client is always right]].
-
-</tw-passagedata><tw-passagedata pid="55" name=" client is always right" tags="" position="625,4800" size="100,100">You watch as all three clients [[left the theater-&gt;rode into the sunset]].</tw-passagedata><tw-passagedata pid="56" name="Ask GB what he thinks" tags="" position="325,4125" size="100,100">GB: I want to respawn. I want to be [[a present-&gt;treasured as a present]] to a new family, instead of a curse to my past one.</tw-passagedata><tw-passagedata pid="57" name="treasured as a present" tags="" position="800,4275" size="100,100">GB pushes Halley and Caine into the chimey. He [[jumps in-&gt;end]] after.
-</tw-passagedata></tw-storydata>
+[[Restart-&gt;start]]</tw-passagedata><tw-passagedata pid="48" name="right" tags="" position="625,4800" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-h-c-happy.jpg&#39;  alt=&#39;All three are happy&#39;/&gt;
+Your clients decided against reincarnation.
+(live: 3s)[(goto: &quot;bad&quot;)]</tw-passagedata><tw-passagedata pid="49" name="Ask GB what he thinks" tags="" position="325,4125" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-talk2.jpg&#39;  alt=&#39;GB talks&#39;/&gt;
+GB: I want to respawn. I want to be [[a present-&gt;treasured as a present]] to a new family, instead of a curse to my past one.</tw-passagedata><tw-passagedata pid="50" name="treasured as a present" tags="" position="800,4275" size="100,100">&lt;img src=&#39;./afterlife-cinema/img/g-push.jpg&#39; class=&#39;small&#39; alt=&#39;GB pushes the two&#39;/&gt;
+GB pushes Halley and Caine into the reincarnation chimey. He [[jumps-&gt;end]] in after.
+</tw-passagedata><tw-passagedata pid="51" name="breath mint" tags="" position="750,1575" size="100,100">&lt;div class=&#39;full-width-borders&#39;&gt;
+&lt;img src=&#39;./afterlife-cinema/img/c-teach.jpg&#39;  alt=&#39;Caine as teacher&#39;/&gt;
+&lt;p&gt;Caine: I was born in the US and was a teacher. I taught two jobs to pay the bills: one at community college, and another at a [[elementary school]].&lt;/p&gt;
+&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="52" name="poor again" tags="" position="525,3125" size="100,100">&lt;img class=&#39;small&#39; src=&#39;./afterlife-cinema/img/c-h-talk.jpg&#39;  alt=&#39;Caine talks to Halley&#39;/&gt;
+Caine: You never know. Maybe you&#39;ll be a bestselling writer and live out your [[best life-&gt;convince-GB]].</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
