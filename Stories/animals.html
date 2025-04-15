@@ -9,41 +9,218 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play animals.</tw-noscript></noscript></tw-story>
-<tw-storydata name="animals" startnode="2" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="DF00A6CB-C23C-4C9E-A8E5-48CCFF91D1C8" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">if (!window.harlowe) {
-  window.harlowe = { State: State };
+<tw-storydata name="animals" startnode="5" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="DF00A6CB-C23C-4C9E-A8E5-48CCFF91D1C8" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">* {
+  margin: 0;
+  padding: 0;
+}
+.pick {
+  text-align:center;
+  padding:50px;
+  display: flex;   
+}
+p {
+  margin: 4px 0;
+}
+.outer {
+  margin-right: 20px;
+}
+.speech {
+  position:relative;
+  background-color:#0abde3;
+  font-size: 16px;
+  height: 80px;
+  text-align: center;
+  border-radius: 12px;
+  width: 240px;
+  display:inline-block;
+}
+.speech:after{
+  content:"";
+  border-width:15px 15px 0;
+  border-style:solid;
+  border-color:#0abde3 transparent;
+  position:absolute;
+  top:100%;
+  left:20px
+} 
+
+// drag
+ .draggable {
+  text-align: center;
+  background: white;
+   color: black;
+   margin-right: 4px;
 }
 
+.dropzone {
+  width: 200px;
+  height: 100px;
+  background: blueviolet;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+}
+
+.dropzone.dragover {
+  background-color: purple;
+}
+
+.dragging {
+  opacity: 0.5;
+}
+</style><script role="script" id="twine-user-script" type="text/twine-javascript">if (!window.harlowe) {
+  window.harlowe = { State: State };
+}
+// TODO: randomize this
+window.harlowe.State.variables.challenges = [
+	9
+]
+window.harlowe.State.variables.critters = {
+ rabbit: {points: 3, special: null},
+ cat: {points: 3, special: 'Always odd'},
+ racoon: {points: 3, special: 'Always even'}, 
+ fox: {points: 5, special: 'Adds 1 to dice in front'}
+}
 window.harlowe.State.variables.lifePoints = 15;
+window.harlowe.State.variables.availableDice = ['rabbit', 'rabbit', 'rabbit']
+
 </script><tw-passagedata pid="1" name="end" tags="" position="725,350" size="100,100">THE ANIMALS ARE SAFE.
 
-THANK YOU FOR PLAYING.</tw-passagedata><tw-passagedata pid="2" name="pick 2" tags="" position="450,100" size="100,100">Pick 2, choose wisely.
+THANK YOU FOR PLAYING.</tw-passagedata><tw-passagedata pid="2" name="pick 2" tags="" position="450,100" size="100,100">Pick 2, choose wisely. [[sorry]]
 
-[[sorry]]
+&lt;section class=&quot;pick&quot;&gt;
+  &lt;div class=&quot;outer&quot;&gt;
+    &lt;div class=&quot;speech&quot;&gt;
+points: 5
+Common
+special: &#39;Adds 1 to dice in front&#39;
+    &lt;/div&gt;
+    &lt;button id=&quot;fox&quot;&gt;fox&lt;/button&gt;
+  &lt;/div&gt;
+    &lt;button id=&quot;cat&quot;&gt;cat&lt;/button&gt;
+    &lt;button id=&quot;racoon&quot;&gt;racoon&lt;/button&gt;
 
-{
-(set: $score to 0)
-(if:$score &gt;= 8)[(dialog: [Beyond this point, things get serious. Grab a snack and buckle up.], &quot;Sure&quot;)]
-(else:)[(dialog: bind $defund, &quot;Which department will you defund?&quot;, &quot;Law Enforcement&quot;, &quot;Education&quot;, &quot;Health&quot;, &quot;Public Housing&quot;)]
-}</tw-passagedata><tw-passagedata pid="3" name="battle" tags="" position="450,325" size="100,100">&lt;div&gt;energy bar 
+&lt;/section&gt;
+
+&lt;script&gt;
+  for (let button of document.getElementsByTagName(&quot;button&quot;)) {
+    button.addEventListener(&quot;click&quot;, function (e) {
+      console.log(window.harlowe.State.variables.critters[button.id]);
+      // alternatively append     &lt;div id=&quot;speech&quot;&gt;&lt;/div&gt; to parent element outer
+      // remove the id on click and add it to the new outer
+// console.log(e.target.parentElement.querySelector(&#39;.speech&#39;).classList.remove(&#39;hide&#39;))
+    });
+  }
+&lt;/script&gt;
+</tw-passagedata><tw-passagedata pid="3" name="battle" tags="" position="450,325" size="100,100">&lt;div&gt;energy bar 
 (print: $lifePoints)
 &lt;/div&gt;
 
 &lt;button id=&#39;decreaseLifePoints&#39;&gt;new dice&lt;/button&gt;
-&lt;button id=&#39;won&#39;&gt;won&lt;/button&gt;
 
-(dialog: bind $defund, &quot;What do you want to do now?&quot;, &quot;Add life&quot;, &quot;Add dice&quot;)
 
+[[pick 1]]
 [[victory-&gt;end]]
+[[lost]]
 &lt;script&gt;
 // might need hack of adding a hidden go to link to passage, then click on it
+
+
 document.getElementById(&#39;decreaseLifePoints&#39;).addEventListener(&quot;click&quot;, function (e) {
 	window.harlowe.State.variables.lifePoints -= 3;
 document.getElementsByTagName(&#39;tw-expression&#39;)[0].textContent = 	window.harlowe.State.variables.lifePoints
     ;
 })
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="sorry" tags="" position="575,225" size="100,100">x was left behind
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="4" name="sorry" tags="" position="350,225" size="100,100">$left was left behind
 
-[[battle]]</tw-passagedata></tw-storydata>
+[[battle]]</tw-passagedata><tw-passagedata pid="5" name="Untitled Passage" tags="" position="650,50" size="100,100">Forest critters
+[[next]]</tw-passagedata><tw-passagedata pid="6" name="next" tags="" position="750,200" size="100,100">Our forest is dying. We need your help!
+[[pick 2]]</tw-passagedata><tw-passagedata pid="7" name="pick 1" tags="" position="225,225" size="100,100">Pick 1, choose wisely.
+
+[[chosen]]
+
+&lt;div class=&quot;dropzone source&quot;&gt;
+&lt;div class=&quot;draggable&quot; draggable=&quot;true&quot; id=&#39;fox&#39;&gt;fox&lt;/div&gt;
+&lt;div class=&quot;draggable&quot; draggable=&quot;true&quot; id=&#39;cat&#39;&gt;cat&lt;/div&gt;
+&lt;div class=&quot;draggable&quot; draggable=&quot;true&quot; id=&#39;racoon&#39;&gt;racoon&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&quot;dropzone drop-target&quot;&gt;&lt;/div&gt;
+
+
+
+&lt;script&gt;
+let dragged;
+
+/* events fired on the draggable target */
+const sources = document.getElementsByClassName(&quot;draggable&quot;);
+for (let source of sources) {
+source.addEventListener(&quot;drag&quot;, (event) =&gt; {
+  console.log(&quot;dragging&quot;);
+}); 
+
+source.addEventListener(&quot;dragstart&quot;, (event) =&gt; {
+  // store a ref. on the dragged elem
+  dragged = event.target;
+  // make it half transparent
+  event.target.classList.add(&quot;dragging&quot;);
+});
+
+source.addEventListener(&quot;dragend&quot;, (event) =&gt; {
+  // reset the transparency
+  event.target.classList.remove(&quot;dragging&quot;);
+});
+}
+
+/* events fired on the drop targets */
+const targets = document.getElementsByClassName(&quot;drop-target&quot;);
+for (let target of targets) {
+target.addEventListener(
+  &quot;dragover&quot;,
+  (event) =&gt; {
+    // prevent default to allow drop
+    event.preventDefault();
+  },
+  false,
+);
+
+target.addEventListener(&quot;dragenter&quot;, (event) =&gt; {
+  // highlight potential drop target when the draggable element enters it
+  if (event.target.classList.contains(&quot;dropzone&quot;)) {
+    event.target.classList.add(&quot;dragover&quot;);
+  }
+});
+
+target.addEventListener(&quot;dragleave&quot;, (event) =&gt; {
+  // reset background of potential drop target when the draggable element leaves it
+  if (event.target.classList.contains(&quot;dropzone&quot;)) {
+    event.target.classList.remove(&quot;dragover&quot;);
+  }
+});
+
+target.addEventListener(&quot;drop&quot;, (event) =&gt; {
+  // prevent default action (open as link for some elements)
+  event.preventDefault();
+  // move dragged element to the selected drop target
+  if (event.target.classList.contains(&quot;dropzone&quot;)) {
+    event.target.classList.remove(&quot;dragover&quot;);
+    event.target.appendChild(dragged);
+window.harlowe.State.variables.chosen = dragged.id;
+window.harlowe.State.variables.availableDice.push(dragged.id)
+        console.log(window.harlowe.State.variables.availableDice)
+
+  }
+});
+}
+// unique to page
+const buttons = document.getElementsByClassName(&#39;source&#39;)
+for (let button of buttons) {
+button.addEventListener(&quot;click&quot;, function (e) {
+console.log(window.harlowe.State.variables.critters[button.id])
+    });
+}
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="8" name="chosen" tags="" position="225,350" size="100,100">$chosen was chosen
+[[battle]]</tw-passagedata><tw-passagedata pid="9" name="lost" tags="" position="500,575" size="100,100">YOU LOST
+
+[[Play again?-&gt;next]]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
 var require,define;!function(){var e={},r={};require=function(i){var n=e[i];return n&&(r[i]=n[1].apply(void 0,n[0].map(require)),e[i]=void 0),r[i]},(define=function(r,i,n){if("function"==typeof r)return r();e[r]=[i,n]}).amd=!0}();/*!
  * https://github.com/paulmillr/es6-shim
