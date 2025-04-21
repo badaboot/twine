@@ -112,6 +112,17 @@ body {
   margin-left: 3.5em;
   background: black;
 }
+#story {
+	margin: 2% 0;
+      padding: 0;
+}
+.passage {
+  line-height: 1.4;
+}
+.two {
+    max-width: 440px;
+    margin: 0 auto;
+}
 .blockImage {
   display: block;
   margin: 0 auto;
@@ -130,9 +141,41 @@ svg {
   display: flex;
   row-gap: 8px;
 }
-
+#passage-battle {
+    max-width: 600px;
+} 
+.flex {
+	justify-content: space-between;
+}
 #ui-bar {
   display: none;
+}
+/* button */ 
+button {
+  border: 2px solid;
+  font: inherit;
+  line-height: 1;
+	margin: 0.5em 0 0 0;
+    padding: 1em;
+  border-radius: 300px; 
+  background: orange;
+  color: black;
+  font-size: 18px;
+}
+button:disabled {
+  color: white;
+}
+button:hover, button:focus {
+  color: orange;
+  background: black;
+  border-color: orange;
+      -webkit-box-shadow: 0 0.5em 0.5em -0.4em orange;
+          box-shadow: 0 0.5em 0.5em -0.4em orange;
+  -webkit-transform: translateY(-0.25em);
+          transform: translateY(-0.25em);
+}
+#moreDice {
+    padding: 0.5em;
 }
 /* videos */
 #sacrifice {
@@ -172,7 +215,7 @@ svg {
 /* recruit circle */
 .box {
   border-radius: 50%;
-  mask: radial-gradient(transparent 89px, #000 90px);
+  mask: radial-gradient(transparent 120px, black 100px);
 }
 .box:before {
   content: "";
@@ -182,10 +225,11 @@ svg {
 
 .container {
   margin: 0 auto;
-  max-width: 200px;
+  max-width: 300px;
 }
 .container .dropzone {
 	background: orange;
+  width: 300px;
 }
 /* end recruit circle */
 .pick {
@@ -199,17 +243,19 @@ p {
   color: white;
   font-size: 2em;
 }
+.end img {
+	width: 200px;
+  	height: 200px;
+}
 .source {
   height: 220px;
+  border-radius: 0;
 /*  width: 460px;*/
   justify-content: center;
 max-width: 860px;
   margin: 0 auto;
 }
-.outer {
-  margin-right: 20px;
-}
-/* eye 440, 200 */
+/* eye */
 .center .wrap {
 	margin: 0 auto;
 }
@@ -217,6 +263,7 @@ max-width: 860px;
   position: relative;
   width: 440px;
   height: 40px;
+  margin: 0 auto;
 }
 .wrap .eye {
     position: absolute;
@@ -375,7 +422,8 @@ max-width: 860px;
 }
 #battleZone {
   height: 240px;
-  width: 500px;
+    width: 100%;
+    max-width: 460px;
   background-image: url(./critters/img/table.jpg);
   margin: 0;
 }
@@ -398,6 +446,39 @@ max-width: 860px;
 .dragging {
   opacity: 0.5;
 }
+/* battery */
+.battery {
+    width: 100px;
+    height: 220px;
+    position: relative;
+    border: 5px solid white;
+    margin: 10px 0 0 0;
+}
+
+.battery:before {
+  content:"\a0";
+  background-color: white;
+  position: absolute;
+  top: -15px;
+  height: 10px;
+  width: 50%;
+  left: 25%;
+}
+.battery:after {
+    content: attr(data-fill);
+    color: white;
+    font-size: 90px;
+    display: block;
+    position: relative;
+    text-align: center;
+}
+.battery > div {
+  background-color: orange;
+  position: absolute;
+  bottom: 0;
+  width: 96%;
+  margin: 2%;
+}
 
 /* dice */
 .perspective {
@@ -405,7 +486,6 @@ max-width: 860px;
   display: flex;
 }
 .parent {
-  margin-left: 20px;
   display: block;
   width: 3em;
 }
@@ -431,6 +511,7 @@ max-width: 860px;
   margin: 0;
   border: none;
   background: none;
+  border-radius: 0;
 }
 .square {
   border-radius: 8px;
@@ -456,6 +537,8 @@ max-width: 860px;
   position: relative;
   text-align: center;
   margin: 0;
+  font-weight: 400;
+    border-radius: 8px;
   -webkit-transform: translateZ(0); /* webkit flicker fix */
   -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
 }
@@ -584,9 +667,23 @@ console.log(
   [isOdd(1).solver == true, isOdd(2).solver == false].every((c) => c)
 );
 */
+window.batteryUpdate = (battery, fill = null, max = null) => {
+  var max  = battery.getAttribute('data-max')
+  var fill = battery.getAttribute('data-fill')
+
+  // if no max, default to percent of 100
+  var perc = (max) ? fill / max * 100 : fill;
+
+  if (!isNaN(fill)) {
+    for (let child of battery.children) {
+      child.style.height = perc + '%'
+    }
+  }
+}
+
 
 const imagePrefix = "./critters/img/animals/";
-const getDiceRoll = (availableResults) => {
+window.getDiceRoll = (availableResults) => {
   if (availableResults === undefined) return 1 + window.getRandomInt(6);
   return availableResults[window.getRandomInt(availableResults.length)];
 };
@@ -598,7 +695,7 @@ State.variables.critterInfo = {
     roll: () => getDiceRoll(),
     image: imagePrefix + "bunny.png",
     opening:
-      "The Enchanted Forest is being flooded by an evil wizard! Only you can save us",
+      "The Enchanted Forest is flooded by an evil wizard! Only you can save us",
     obituary: "She's a loving mother who's survived by 30 children.",
   },
   moose: {
@@ -616,7 +713,7 @@ State.variables.critterInfo = {
     roll: () => getDiceRoll([2, 4, 6]),
     image: imagePrefix + "fish.png",
     opening:
-      "He's drying up the lakes and the rivers! Please fight the Mystery Man!",
+      "He's drying up lakes and rivers! Please fight the Mystery Man!",
     obituary: "The first reader of his family, his favorite tale was the 'Little Mermaid'.",
   },
   pig: {
@@ -632,7 +729,7 @@ State.variables.critterInfo = {
     points: 5,
     roll: () => getDiceRoll([4, 5, 6]),
     special: "Rolls >3",
-    image: imagePrefix + "fish.png",
+    image: imagePrefix + "turtle.jpeg",
     opening:
       "I've never seen someone like him in my 100+ years. We need you to defeat the Mystery Man.",
     obituary: "A lifelong tai-chi practioner, he was a big donor to the Turtle Tai Chi Foundation.",
@@ -640,7 +737,7 @@ State.variables.critterInfo = {
   crow: {
     points: 5,
     roll: () => getDiceRoll(),
-    special: "Fulfills any goal",
+    special: "Rolls 1-6. Re-rolls dice in front",
     image: imagePrefix + "crow.png",
     opening: "CAW CAW CAW! Mystery Man set the Enchanted Forest ON FIRE!",
     obituary: "Master hoarder left behind a tree full of shiny trinkets.",
@@ -707,15 +804,27 @@ setup.getDiceElemsGivenName = (name) => {
   return buttonElem;
 };
 State.variables.playerScore = 15;
+setup.getBattery = () => {
+// <div class="battery" data-max="15" data-fill="15">
+	const batteryElem = document.createElement("div");
+  batteryElem.classList.add('battery')
+  batteryElem.dataset.max = 15
+  batteryElem.dataset.fill = State.variables.playerScore
+  batteryElem.appendChild(document.createElement("div"))
+  return batteryElem
+}
 State.variables.originalAvailableDice = ["bunny", "bunny", "bunny"];
 State.variables.availableDice = [...State.variables.originalAvailableDice];
 State.variables.originalChallenges = [
-  [isEven(), isOdd()],
+/*  [isEven(), isOdd()],
   [isSmaller(5), isLarger(2)],
   [sumTo(6), isNum(2)],
   [isEven(), isLarger(3)],
   [isLarger(2), isLarger(1), isLarger(3)],
-  [sumTo(6), isEven()],
+
+  [isSmaller(2), isLarger(4), isLarger(3), isSmaller(3)],
+    */
+    [sumTo(6), sumTo(6), sumTo(6)],
 ];
 State.variables.challenges = [...State.variables.originalChallenges];
 setup.getVar = function (name) {
@@ -800,7 +909,7 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
 </script><tw-passagedata pid="1" name="end" tags="" position="850,375" size="100,100">&lt;p&gt;The Mystery Man DISAPPEARED, as promised.&lt;/p&gt;
 &lt;p id=&#39;end&#39;&gt;The critters are safe.&lt;/p&gt;
 &lt;&lt;print $sacrificed&gt;&gt;.
-&lt;div class=&#39;flex&#39;&gt;
+&lt;div class=&#39;flex two&#39;&gt;
 &lt;&lt;button [[PLAY AGAIN-&gt;help]]&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;button [[Nah I&#39;m good-&gt;start]]&gt;&gt;&lt;&lt;/button&gt;&gt;
  &lt;audio
@@ -809,7 +918,7 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
       autoplay
     &gt;&lt;/audio&gt;
 &lt;/div&gt;
-&lt;div class=&#39;source&#39;&gt;&lt;/div&gt;
+&lt;div class=&#39;source flex end&#39;&gt;&lt;/div&gt;
 
 &lt;script&gt;
   (function () {
@@ -827,7 +936,7 @@ if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = str.
     } 
   })();
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="2" name="pick 2" tags="" position="350,50" size="100,100">&lt;p&gt;Pick 2 critters to join the cause.&lt;/p&gt;
+</tw-passagedata><tw-passagedata pid="2" name="pick 2" tags="" position="350,50" size="100,100">&lt;p&gt;Drag 2 critters to join the cause.&lt;/p&gt;
 &lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;box dropzone drop-target&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;div class=&quot;flex source&quot;&gt;&lt;/div&gt;
 
@@ -859,25 +968,27 @@ if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = str.
 
 &lt;/script&gt;
 </tw-passagedata><tw-passagedata pid="3" name="battle" tags="" position="450,450" size="100,100">&lt;div class=&quot;wrap&quot;&gt;&lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;&lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-
 &lt;div id=&quot;challengeZone&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;battleZone&quot; class=&quot;dropzone drop-target&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;flex&quot;&gt;&lt;div id=&quot;battleZone&quot; class=&quot;dropzone drop-target&quot;&gt;&lt;/div&gt;
+  &lt;div&gt;&lt;/div&gt;
+&lt;/div&gt; &lt;/div&gt;
+&lt;&lt;nobr&gt;&gt; 
 &lt;div class=&quot;flex&quot;&gt;
   &lt;div class=&quot;source&quot;&gt;&lt;/div&gt;
-  &lt;div&gt;
-    &lt;p&gt;&lt;span id=&quot;diceLeft&quot;&gt;&lt;/span&gt;&lt;/p&gt;
-    &lt;div class=&quot;flex&quot;&gt;
-      &lt;button id=&quot;moreDice&quot;&gt;More dice (-3 energy)&lt;/button&gt;
-      &lt;button id=&quot;retry&quot;&gt;Retry (-2 energy)&lt;/button&gt;
-    &lt;/div&gt;
-    &lt;p&gt;Energy: &lt;span id=&quot;playerScore&quot;&gt;15&lt;/span&gt;&lt;/p&gt;
+  &lt;div style=&#39;width: 160px; margin: 18px 0 0 0;&#39;&gt;
+    &lt;p id=&quot;diceLeft&quot;&gt;&lt;/p&gt;
+    &lt;button id=&quot;moreDice&quot;&gt;More dice (-3 energy)&lt;/button&gt;
+    &lt;button id=&quot;retry&quot;&gt;Retry (-2 energy)&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
+ &lt;&lt;endnobr&gt;&gt; 
+
  &lt;audio
       src=&quot;./critters/audio/dice.mp3&quot;
       type=&quot;audio/mpeg&quot;
       autoplay
     &gt;&lt;/audio&gt;
+    
 &lt;script&gt;
   (function () {
     // add class  blink, grin, or down to eye
@@ -889,12 +1000,16 @@ if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = str.
 
     const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
     const {
+      getBattery,
       getFieldFromCritterWithName,
       getDiceElemsGivenName,
       getVar,
       setVarValue,
     } = window.SugarCube.setup;
-
+    
+    document.getElementsByClassName(&quot;flex&quot;)[0].appendChild(getBattery())
+//    window.batteryUpdate(batteryElem)
+	
     const challenges = getVar(&quot;challenges&quot;);
     if (!challenges.length) return;
     const challenge = challenges.shift();
@@ -908,13 +1023,15 @@ if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = str.
       if (arr[0] === &quot;sum&quot;) text = &quot;SUM &quot; + text;
       return text;
     };
-
+    let diceIndex = 0;
+const batteryElem = document.getElementsByClassName(&#39;battery&#39;)[0]
 const diceAudio =  new Audio(&quot;./critters/audio/dice.mp3&quot;);
     const updatePlayerScore = (updateNum) =&gt; {
       let playerScore = getVar(&quot;playerScore&quot;);
       playerScore += updateNum;
       setVarValue(&quot;playerScore&quot;, playerScore);
-      document.getElementById(&quot;playerScore&quot;).textContent = playerScore;
+      batteryElem.dataset.fill = &#39;&#39; +playerScore
+  window.batteryUpdate(batteryElem)
     };
     updatePlayerScore(0)
     document.getElementById(&quot;retry&quot;).addEventListener(&quot;click&quot;, (e) =&gt; {
@@ -927,7 +1044,11 @@ const diceAudio =  new Audio(&quot;./critters/audio/dice.mp3&quot;);
         battleZoneElem.replaceChildren();
         sourceElem.replaceChildren();
         challengeZone.replaceChildren();
+        for (let obs of challenge) {
+          delete obs.nums
+        }
         showInitialDice();
+        updateDiceLeft(); 
         showChallenges();
       }
     });
@@ -937,20 +1058,31 @@ const tapAudio =  new Audio(&quot;./critters/audio/tap.mp3&quot;);
 const bounceAudio =  new Audio(&quot;./critters/audio/bounce.mp3&quot;);
 const hmAudio =  new Audio(&quot;./critters/audio/hm.mp3&quot;);
 
+const rollDie = (draggedElem) =&gt; {
+const critterName = draggedElem.dataset.char;
+  rollAudio.play()
+  const randomInt = critters[critterName].roll();
+  draggedElem.dataset.value = randomInt;
+  draggedElem.focus()
+  setBackgroundImageToDice(draggedElem.querySelector(&quot;.child&quot;), randomInt);
+}
     const critters = getVar(&quot;critterInfo&quot;);
     function callback(dropElem, draggedElem) {
       if (!dropElem || !draggedElem) return;
       if (dropElem.id === &quot;battleZone&quot;) {
-      rollAudio.play()
-        const critterName = draggedElem.dataset.char;
-        const randomInt = critters[critterName].roll();
-        draggedElem.dataset.value = randomInt;
-        setBackgroundImageToDice(draggedElem.querySelector(&quot;.child&quot;), randomInt);
+      rollDie(draggedElem)
+        // re-roll dice in front
+        if (draggedElem.dataset.char === &#39;crow&#39;) {
+          if (battleZoneElem.children.length &gt; 1) {
+            // get second last dice, since last dice is crow
+            setTimeout(() =&gt; rollDie(battleZoneElem.children[battleZoneElem.children.length-2]), 500)
+          }
+        }
       } else {
         // challenge zone
         const currChallenge = challenge[parseInt(dropElem.dataset.index, 10)];
 
-        if (currChallenge.display[0] === &quot;sum&quot; &amp;&amp; draggedElem.dataset.char !== &#39;crow&#39;) {
+        if (currChallenge.display[0] === &quot;sum&quot;) {
           const remainder = currChallenge.remainder(
             currChallenge.display[1],
             currChallenge.nums
@@ -988,8 +1120,6 @@ const hmAudio =  new Audio(&quot;./critters/audio/hm.mp3&quot;);
           alert(&quot;Please roll the dice first by dragging it onto the table&quot;);
           return false;
         }
-        // goes into any challenge
-        if (draggedElem.dataset.char === &#39;crow&#39;) return true
         // for sum: update challenge with array
         const currChallenge = challenge[challengeElem.dataset.index];
         if (currChallenge.display[0] === &quot;sum&quot;) {
@@ -1040,28 +1170,27 @@ const hmAudio =  new Audio(&quot;./critters/audio/hm.mp3&quot;);
     };
     showChallenges();
 
-    let index = 0;
-    const availableDice = [...getVar(&quot;availableDice&quot;)] //Object.keys(critters); //[&#39;crow&#39;, &#39;crow&#39;, &#39;crow&#39;]// [...getVar(&quot;availableDice&quot;)]
-	window.shuffleArray( availableDice);    
+    const availableDice = [...getVar(&#39;availableDice&#39;)] //Object.keys(critters); //[&#39;crow&#39;, &#39;crow&#39;, &#39;crow&#39;]
+	  window.shuffleArray(availableDice);    
 
     const showInitialDice = () =&gt; {
-      index = 0;
-      while (index &lt; Math.min(availableDice.length, 3)) {
-        sourceElem.appendChild(getDiceElemsGivenName(availableDice[index]));
-        index++;
+      diceIndex = 0;
+      while (diceIndex &lt; Math.min(availableDice.length, 3)) {
+        sourceElem.appendChild(getDiceElemsGivenName(availableDice[diceIndex]));
+        diceIndex++;
       }
     };
     showInitialDice();
 
+    const moreDiceElem = document.getElementById(&quot;moreDice&quot;);
     const updateDiceLeft = () =&gt; {
       document.getElementById(&quot;diceLeft&quot;).textContent = `Dice left: ${
-        availableDice.length - index
+        availableDice.length - diceIndex
       }`;
+      moreDiceElem.disabled = availableDice.length &lt;= diceIndex;
     };
     updateDiceLeft();
-
-    const moreDiceElem = document.getElementById(&quot;moreDice&quot;);
-    moreDiceElem.disabled = availableDice.length &lt;= index;
+    
     moreDiceElem.addEventListener(&quot;click&quot;, (e) =&gt; {
       updatePlayerScore(-3);
       diceAudio.play()
@@ -1069,22 +1198,22 @@ const hmAudio =  new Audio(&quot;./critters/audio/hm.mp3&quot;);
       // remove existing chidren from board and source
       sourceElem.replaceChildren();
       battleZoneElem.replaceChildren();
-      const limit = index + 3;
-      while (index &lt; Math.min(availableDice.length, limit)) {
-        sourceElem.appendChild(getDiceElemsGivenName(availableDice[index]));
-        index++;
+      const limit = diceIndex + 3;
+      while (diceIndex &lt; Math.min(availableDice.length, limit)) {
+        sourceElem.appendChild(getDiceElemsGivenName(availableDice[diceIndex]));
+        diceIndex++;
         // add event listeners to newly added sources
         window.addDrag(callback, checkFunc);
       }
 
-      moreDiceElem.disabled = getVar(&quot;availableDice&quot;).length &lt;= index;
+      moreDiceElem.disabled = getVar(&quot;availableDice&quot;).length &lt;= diceIndex;
       updateDiceLeft();
     });
 
     window.addDrag(callback, checkFunc);
   })();
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="4" name="sorry" tags="" position="0,50" size="100,100">&lt;&lt;link `$left + &quot; was left behind&quot;` &quot;battle&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+</tw-passagedata><tw-passagedata pid="4" name="sorry" tags="" position="125,75" size="100,100">&lt;&lt;link `$left + &quot; was left behind&quot;` &quot;battle&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 
 
 &lt;script&gt;
@@ -1093,10 +1222,10 @@ document.onmousedown = (event) =&gt; {
     if (link) link.click()
 }
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="5" name="start" tags="" position="650,50" size="100,100">&lt;a data-passage=&quot;help&quot; class=&quot;link-internal link-image&quot;&gt;
-	&lt;img src=&#39;./critters/img/logo.png&#39; &gt;
+	&lt;img  class=&#39;blockImage&#39; src=&#39;./critters/img/logo.png&#39; &gt;
 &lt;/a&gt;
 
-Click anywhere to continue
+&lt;p&gt;Click anywhere to continue&lt;/p&gt;
 
   &lt;audio
       src=&quot;./critters/audio/main.mp3&quot;
@@ -1182,8 +1311,8 @@ document.onmousedown = (event) =&gt; {
 };
 })();
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="victory" tags="" position="75,250" size="100,100">&lt;p class=&#39;large&#39;&gt;Victory! Your energy: &lt;&lt;print $playerScore&gt;&gt;&lt;/p&gt;
-&lt;div class=&#39;flex&#39;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="victory" tags="" position="75,250" size="100,100">&lt;p&gt;Victory! Your energy: &lt;&lt;print $playerScore&gt;&gt;&lt;/p&gt;
+&lt;div class=&#39;flex two&#39;&gt;
 &lt;&lt;button [[Recruit critter (-2 energy)-&gt;recruit]]&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;button [[Replenish points-&gt;replenish]]&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
@@ -1284,8 +1413,7 @@ document.onmousedown = (event) =&gt; {
     };
   })();
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="13" name="Take me to the Mystery Man" tags="" position="500,275" size="100,100">&lt;div class=&#39;center&#39;&gt;
-&lt;p&gt;You: Who are you? And why are you destroying the forest?&lt;/p&gt;
+</tw-passagedata><tw-passagedata pid="13" name="Take me to the Mystery Man" tags="" position="500,275" size="100,100">&lt;div class=&#39;center&#39;&gt;&lt;p&gt;You: Who are you? And why are you destroying the forest?&lt;/p&gt;
 &lt;div class=&quot;wrap&quot;&gt; &lt;div class=&quot;eye blink&quot;&gt;&lt;/div&gt;&lt;div class=&quot;eye blink&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Mystery Man: Let’s play a game. If you win I’ll leave. If you lose we’ll play again.&lt;/p&gt;
 &lt;p&gt;You: [[Okay-&gt;pick 2]]&lt;/p&gt;
