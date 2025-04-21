@@ -508,9 +508,20 @@ max-width: 860px;
 </style><script role="script" id="twine-user-script" type="text/twine-javascript">window.goToPage = function (passageName) {
   Engine.play(passageName);
 };
-
+// return [0, max)
+window.getRandomInt = (max) => {
+  return Math.floor(Math.random() * max);
+};
+// in-place
+window.shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+  }
+  return array;
+};
 // solvers
-window.sumTo = (target) => {
+const sumTo = (target) => {
   return {
     display: ["sum", target],
     solver: () => {
@@ -526,19 +537,19 @@ console.log(sumTo(10).display[0] === "sum" && sumTo(10).display[1] === 10);
 const s = sumTo(10).solver;
 console.log([s(1) == false, s(2) == false, s(7) == true].every((c) => c));
 */
-window.isNum = (target) => {
+const isNum = (target) => {
   return {
     display: ["is", target],
     solver: (val, target) => val === target,
   };
 };
-window.isSmaller = (target) => {
+const isSmaller = (target) => {
   return {
     display: ["smaller", target],
     solver: (val, target) => val < target,
   };
 };
-window.isLarger = (target) => {
+const isLarger = (target) => {
   return {
     display: ["larger", target],
     solver: (val, target) => val > target,
@@ -549,7 +560,7 @@ console.log(isNum(6).display[0] === "is" && isNum(6).display[1] === 6);
 const i = isNum(1).solver;
 console.log([i(1) == true, i(2) == false, i(7) == false].every((c) => c));
 */
-window.isEven = () => {
+const isEven = () => {
   return {
     display: ["is", "EVEN"],
     solver: (val) => val % 2 === 0,
@@ -561,7 +572,7 @@ console.log(
   [isEven().solver(1) == false, isEven().solver(2) == true].every((c) => c)
 );
 */
-window.isOdd = () => {
+const isOdd = () => {
   return {
     display: ["is", "ODD"],
     solver: (val) => val % 2 === 1,
@@ -574,113 +585,65 @@ console.log(
 );
 */
 
-// return [0, max)
-window.getRandomInt = (max) => {
-  return Math.floor(Math.random() * max);
-};
-// in-place
-window.shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-  }
-  return array;
-};
 const imagePrefix = "./critters/img/animals/";
 const getDiceRoll = (availableResults) => {
   if (availableResults === undefined) return 1 + window.getRandomInt(6);
-  return availableResults[window.getRandomInt(availableResults.length)]
+  return availableResults[window.getRandomInt(availableResults.length)];
 };
 // get dice DOM elements
 State.variables.critterInfo = {
   bunny: {
     points: 3,
-    special: null,
+    special: "Rolls 1-6",
     roll: () => getDiceRoll(),
     image: imagePrefix + "bunny.png",
     opening:
       "The Enchanted Forest is being flooded by an evil wizard! Only you can save us",
+    obituary: "She's a loving mother who's survived by 30 children.",
   },
-  sheep: {
+  moose: {
     points: 3,
-    special: "Always odd",
+    special: "Rolls odd",
     roll: () => getDiceRoll([1, 3, 5]),
-    image: imagePrefix + "sheep.png",
+    image: imagePrefix + "moose.jpeg",
     opening:
-      "BAA BAA! He poisoned the grass in the Enchanted Forest! Fight him to save us!",
+      "He moves at night. No plants grow where he treads. We need you to fight the Mystery Man.",
+    obituary: "The last in line in a family of roadkills, he finally found peace and gallops in Heaven.",
   },
   fish: {
     points: 3,
-    special: "Always even",
+    special: "Rolls even",
     roll: () => getDiceRoll([2, 4, 6]),
     image: imagePrefix + "fish.png",
     opening:
-      "He poisoned the waters in the Enchanted Forest. Please help us defeat the Mystery Man.",
+      "He's drying up the lakes and the rivers! Please fight the Mystery Man!",
+    obituary: "The first reader of his family, his favorite tale was the 'Little Mermaid'.",
   },
-  moose: {
+  pig: {
     points: 5,
-    special: "Always >2",
-    roll: () => getDiceRoll([3, 4, 5, 6]),
-    image: imagePrefix + "moose.jpeg",
+    special: "Rolls <4",
+    roll: () => getDiceRoll([1, 2, 3]),
+    image: imagePrefix + "pig.png",
     opening:
-      "All I know is he moves at night. No plants grow where he treads. We need you to fight him.",
+      "The Mystery Man wiped out all the fruits in the Enchanted Forest! We have nothing to eat.",
+    obituary: "A truffle-finding champion and a painter, he painted 100+ works of still-life with fruits.", 
   },
-  // need be hard-coded
+  turtle: {
+    points: 5,
+    roll: () => getDiceRoll([4, 5, 6]),
+    special: "Rolls >3",
+    image: imagePrefix + "fish.png",
+    opening:
+      "I've never seen someone like him in my 100+ years. We need you to defeat the Mystery Man.",
+    obituary: "A lifelong tai-chi practioner, he was a big donor to the Turtle Tai Chi Foundation.",
+  },
   crow: {
     points: 5,
     roll: () => getDiceRoll(),
     special: "Fulfills any goal",
     image: imagePrefix + "crow.png",
     opening: "CAW CAW CAW! Mystery Man set the Enchanted Forest ON FIRE!",
-  },
-  // static
-  pig: {
-    points: 5,
-    special: "Returns 1",
-    roll: () => 1,
-    image: imagePrefix + "pig.png",
-    opening:
-      "He made all the apples and mushrooms disappear in the Enchanted Forest! If he continues we'll have nothing to eat.",
-  },
-  frog: {
-    points: 5,
-    roll: () => 2,
-    special: "Returns 2",
-    image: imagePrefix + "frog.jpeg",
-    opening:
-      "He's drying up the lakes and the rivers! Please help fight the Mystery Man!",
-  },
-  turtle: {
-    points: 5,
-    special: "Returns 3",
-    roll: () => 3,
-    image: imagePrefix + "turtle.jpeg",
-    opening:
-      "In my 100 years I've never seen someone like him. I don't know what he is. Maybe you'll find out.",
-  },
-  cat: {
-    points: 5,
-    special: "Returns 4",
-    roll: () => 4,
-    image: imagePrefix + "cat.png",
-    opening:
-      "He made all the apples and mushrooms disappear in the Enchanted Forest! If he continues we'll have nothing to eat.",
-  },
-  mouse: {
-    points: 5,
-    special: "Returns 5",
-    roll: () => 5,
-    image: imagePrefix + "mouse.png",
-    opening:
-      "He's drying up the lakes and the rivers! Please help fight the Mystery Man!",
-  },
-  bear: {
-    points: 5,
-    special: "Returns 6",
-    roll: () => 6,
-    image: imagePrefix + "bear.png",
-    opening:
-      "In my 100 years I've never seen someone like him. I don't know what he is. Maybe you'll find out.",
+    obituary: "Master hoarder left behind a tree full of shiny trinkets.",
   },
 };
 window.capitalizeFirstLetter = (text) =>
@@ -746,15 +709,15 @@ setup.getDiceElemsGivenName = (name) => {
 State.variables.playerScore = 15;
 State.variables.originalAvailableDice = ["bunny", "bunny", "bunny"];
 State.variables.availableDice = [...State.variables.originalAvailableDice];
-
-State.variables.challenges = [
+State.variables.originalChallenges = [
   [isEven(), isOdd()],
   [isSmaller(5), isLarger(2)],
-  [sumTo(6), isNum(2)], // bug
+  [sumTo(6), isNum(2)],
   [isEven(), isLarger(3)],
   [isLarger(2), isLarger(1), isLarger(3)],
   [sumTo(6), isEven()],
 ];
+State.variables.challenges = [...State.variables.originalChallenges];
 setup.getVar = function (name) {
   return State.variables[name];
 };
@@ -773,7 +736,7 @@ setup.increaseScore = function (amount) {
   State.variables.playerScore += amount;
 };
 
-State.variables.left = "";
+State.variables.sacrificed = new Set();
 State.variables.chosen = "";
 
 // checkFunc: return true to pass, false to reject
@@ -835,20 +798,46 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
   }
 };
 </script><tw-passagedata pid="1" name="end" tags="" position="850,375" size="100,100">&lt;p&gt;The Mystery Man DISAPPEARED, as promised.&lt;/p&gt;
-&lt;p&gt;The critters are safe.&lt;/p&gt;
-
+&lt;p id=&#39;end&#39;&gt;The critters are safe.&lt;/p&gt;
+&lt;&lt;print $sacrificed&gt;&gt;.
 &lt;div class=&#39;flex&#39;&gt;
 &lt;&lt;button [[PLAY AGAIN-&gt;help]]&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;button [[I&#39;m good-&gt;start]]&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="pick 2" tags="" position="350,50" size="100,100">&lt;p&gt;Pick 2 critters to join the cause.&lt;/p&gt;
+&lt;&lt;button [[Nah I&#39;m good-&gt;start]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+ &lt;audio
+      src=&quot;./critters/audio/happyEnd.mp3&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+    &gt;&lt;/audio&gt;
+&lt;/div&gt;
+&lt;div class=&#39;source&#39;&gt;&lt;/div&gt;
+
+&lt;script&gt;
+  (function () {
+    const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
+        const { getVar, getImageFromCritterName } =
+      window.SugarCube.setup;
+    const sacrificed = getVar(&quot;sacrificed&quot;);
+const str = document.getElementById(&#39;end&#39;).textContent;
+// remove the period
+if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = str.substr(0, str.length-1) + &#39; thanks to the sacrifice(s) below.&#39;
+    const critterInfo = getVar(&quot;critterInfo&quot;);
+    //  for (let name of Object.keys(critterInfo)) {
+    for (let name of sacrificed) {
+      sourceElem.appendChild(getImageFromCritterName(name));
+    } 
+  })();
+&lt;/script&gt;
+</tw-passagedata><tw-passagedata pid="2" name="pick 2" tags="" position="350,50" size="100,100">&lt;p&gt;Pick 2 critters to join the cause.&lt;/p&gt;
 &lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;box dropzone drop-target&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;div class=&quot;flex source&quot;&gt;&lt;/div&gt;
 
 &lt;&lt;set $availableDice to $originalAvailableDice&gt;&gt;
+&lt;&lt;set $challenges to $originalChallenges&gt;&gt;
 &lt;&lt;set $playerScore to 15&gt;&gt;
 
 &lt;script&gt;
 (function () {
+  const dropAudio =  new Audio(&quot;./critters/audio/drop.mp3&quot;);
   const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
 
   const {addToDice, getDiceElemsGivenName, getRandomCritterOfNum} = window.SugarCube.setup
@@ -860,7 +849,7 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
   const callback = (_, draggedElem) =&gt; {
     addToDice(draggedElem.dataset.char);
     const draggableElems = sourceElem.querySelectorAll(&quot;.draggable&quot;);
-
+	dropAudio.play();
     if (draggableElems.length === 1) { 
       window.goToPage(&quot;battle&quot;);
     }
@@ -884,6 +873,11 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
     &lt;p&gt;Energy: &lt;span id=&quot;playerScore&quot;&gt;15&lt;/span&gt;&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;
+ &lt;audio
+      src=&quot;./critters/audio/dice.mp3&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+    &gt;&lt;/audio&gt;
 &lt;script&gt;
   (function () {
     // add class  blink, grin, or down to eye
@@ -915,6 +909,7 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
       return text;
     };
 
+const diceAudio =  new Audio(&quot;./critters/audio/dice.mp3&quot;);
     const updatePlayerScore = (updateNum) =&gt; {
       let playerScore = getVar(&quot;playerScore&quot;);
       playerScore += updateNum;
@@ -923,6 +918,7 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
     };
     updatePlayerScore(0)
     document.getElementById(&quot;retry&quot;).addEventListener(&quot;click&quot;, (e) =&gt; {
+      diceAudio.play()
       updatePlayerScore(-2);
       if (getVar(&quot;playerScore&quot;) &lt;= 0) {
         window.goToPage(&quot;lost&quot;);
@@ -936,17 +932,22 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
       }
     });
 
+const rollAudio =  new Audio(&quot;./critters/audio/wood.m4a&quot;);
+const tapAudio =  new Audio(&quot;./critters/audio/tap.mp3&quot;);
+const bounceAudio =  new Audio(&quot;./critters/audio/bounce.mp3&quot;);
+const hmAudio =  new Audio(&quot;./critters/audio/hm.mp3&quot;);
+
     const critters = getVar(&quot;critterInfo&quot;);
     function callback(dropElem, draggedElem) {
       if (!dropElem || !draggedElem) return;
       if (dropElem.id === &quot;battleZone&quot;) {
+      rollAudio.play()
         const critterName = draggedElem.dataset.char;
         const randomInt = critters[critterName].roll();
         draggedElem.dataset.value = randomInt;
         setBackgroundImageToDice(draggedElem.querySelector(&quot;.child&quot;), randomInt);
       } else {
         // challenge zone
-        console.log(challenge, dropElem, draggedElem.dataset.val);
         const currChallenge = challenge[parseInt(dropElem.dataset.index, 10)];
 
         if (currChallenge.display[0] === &quot;sum&quot; &amp;&amp; draggedElem.dataset.char !== &#39;crow&#39;) {
@@ -956,6 +957,7 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
           );
           if (remainder &gt; 0) {
             dropElem.textContent = remainder;
+            hmAudio.play()
             return;
           }
         }
@@ -965,6 +967,7 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
             &#39;[data-index=&quot;&#39; + dropElem.dataset.index + &#39;&quot;]&#39;
           )
         );
+        tapAudio.play();
         setTimeout(() =&gt; {
           if (challengeElem.children.length === 0) {
             if (!challenges.length) {
@@ -999,11 +1002,17 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
           currChallenge.solver,
           currChallenge.display[1]
         );
-        return currChallenge.solver(
+        const bool = currChallenge.solver(
           parseInt(draggedElem.dataset.value, 10),
           currChallenge.display[1],
           currChallenge.nums
         );
+        if (bool === true) {
+        	// play some sfx
+        } else {
+        	bounceAudio.play()
+        }
+        return bool
       }
       return true;
     };
@@ -1033,7 +1042,6 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
 
     let index = 0;
     const availableDice = [...getVar(&quot;availableDice&quot;)] //Object.keys(critters); //[&#39;crow&#39;, &#39;crow&#39;, &#39;crow&#39;]// [...getVar(&quot;availableDice&quot;)]
-    console.log(availableDice)
 	window.shuffleArray( availableDice);    
 
     const showInitialDice = () =&gt; {
@@ -1056,6 +1064,7 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
     moreDiceElem.disabled = availableDice.length &lt;= index;
     moreDiceElem.addEventListener(&quot;click&quot;, (e) =&gt; {
       updatePlayerScore(-3);
+      diceAudio.play()
 
       // remove existing chidren from board and source
       sourceElem.replaceChildren();
@@ -1083,23 +1092,31 @@ document.onmousedown = (event) =&gt; {
 		const link = document.querySelector(&#39;.link-internal&#39;)
     if (link) link.click()
 }
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="5" name="start" tags="" position="650,50" size="100,100">&lt;h1&gt;[[Forest critters-&gt;help]]&lt;/h1&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="5" name="start" tags="" position="650,50" size="100,100">&lt;a data-passage=&quot;help&quot; class=&quot;link-internal link-image&quot;&gt;
+	&lt;img src=&#39;./critters/img/logo.png&#39; &gt;
+&lt;/a&gt;
 
 Click anywhere to continue
 
- 
+  &lt;audio
+      src=&quot;./critters/audio/main.mp3&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+      loop
+    &gt;&lt;/audio&gt;
 &lt;script&gt;
 document.onmousedown = (event) =&gt; {
 	const link = document.querySelector(&#39;.link-internal&#39;)
     if (link) link.click()
 }
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="6" name="recruit" tags="" position="225,325" size="100,100">&lt;p&gt;Drag a critter to join the cause.&lt;/p&gt;
+</tw-passagedata><tw-passagedata pid="6" name="recruit" tags="" position="225,325" size="100,100">&lt;p&gt;Drag a critter into the hole.&lt;/p&gt;
 &lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;box dropzone drop-target&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;div class=&quot;flex source&quot;&gt;&lt;/div&gt;
 &lt;&lt;set $playerScore to $playerScore-2&gt;&gt;
 &lt;script&gt;
   (function () {
+  const dropAudio =  new Audio(&quot;./critters/audio/drop.mp3&quot;);
   const {getDiceElemsGivenName, getRandomCritterOfNum, addToDice, setVarValue} = window.SugarCube.setup
   const names = getRandomCritterOfNum(3)
     const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
@@ -1111,6 +1128,7 @@ document.onmousedown = (event) =&gt; {
   	  const draggedId = draggedElem.dataset.char
       addToDice(draggedId);
       setVarValue(&quot;chosen&quot;, draggedId);
+      dropAudio.play();
       window.goToPage(&quot;chosen&quot;);
     }
     window.addDrag(callback);
@@ -1119,6 +1137,11 @@ document.onmousedown = (event) =&gt; {
 </tw-passagedata><tw-passagedata pid="7" name="chosen" tags="" position="225,500" size="100,100">&lt;div class=&#39;show&#39;&gt;
 &lt;p&gt;&lt;&lt;link `$chosen + &quot; was chosen&quot;` &quot;battle&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/p&gt;
 &lt;/div&gt;
+ &lt;audio
+      src=&quot;./critters/audio/selected.mp3&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+    &gt;&lt;/audio&gt;
 &lt;script&gt;
 (function () {
 		const link = document.querySelector(&#39;.link-internal&#39;)
@@ -1136,11 +1159,20 @@ document.onmousedown = (event) =&gt; {
 })();
 
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="8" name="lost" tags="" position="700,575" size="100,100">&lt;p&gt;YOU LOST :(&lt;/p&gt;
+&lt;div class=&#39;center&#39;&gt;
 
+&lt;div class=&quot;wrap&quot;&gt;&lt;div class=&quot;eye grin&quot;&gt;&lt;/div&gt;&lt;div class=&quot;eye grin&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;p&gt;Mystery Man: &lt;&lt;link &quot;Let&#39;s play again, as promised.&quot; &#39;pick 2&#39;&gt;&gt;&lt;/p&gt;&lt;&lt;/link&gt;&gt;
+
+ &lt;audio
+      src=&quot;./critters/audio/lost.mp3&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+    &gt;&lt;/audio&gt;
 &lt;script&gt;
 (function () {
-const arr = [&quot;Let&#39;s play again, as you promised.&quot;, &quot;I had fun. Let&#39;d play again.&quot;, &quot;I enjoyed our game. Again?&quot;, &quot;I&#39;m so lonely. Let&#39;s play again.&quot;]
+const arr = [&quot;Let&#39;s play again, as you promised.&quot;, &quot;I had fun. Let&#39;s play again.&quot;, &quot;I enjoyed our game. Again?&quot;, &quot;I&#39;m so lonely. Let&#39;s play again.&quot;]
 
 document.getElementsByClassName(&#39;link-internal&#39;)[0].textContent =  arr[window.getRandomInt(arr.length)];
 
@@ -1150,7 +1182,7 @@ document.onmousedown = (event) =&gt; {
 };
 })();
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="victory" tags="" position="75,250" size="100,100">&lt;p class=&#39;large&#39;&gt;Victory!&lt;/p&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="victory" tags="" position="75,250" size="100,100">&lt;p class=&#39;large&#39;&gt;Victory! Your energy: &lt;&lt;print $playerScore&gt;&gt;&lt;/p&gt;
 &lt;div class=&#39;flex&#39;&gt;
 &lt;&lt;button [[Recruit critter (-2 energy)-&gt;recruit]]&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;&lt;button [[Replenish points-&gt;replenish]]&gt;&gt;&lt;&lt;/button&gt;&gt;
@@ -1160,21 +1192,25 @@ document.onmousedown = (event) =&gt; {
       type=&quot;audio/mpeg&quot;
       autoplay
     &gt;&lt;/audio&gt;</tw-passagedata><tw-passagedata pid="10" name="replenish" tags="" position="225,200" size="100,100">&lt;div class=&quot;content&quot;&gt;
-  &lt;p&gt;Drag 1 critter into the fire to replenish energy.&lt;/p&gt;
+  &lt;p&gt;Drag a critter into the fire.&lt;/p&gt;
   &lt;div class=&quot;flex source&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&quot;replenish&quot; class=&quot;dropzone drop-target&quot;&gt;
   &lt;video autoplay loop src=&quot;./critters/img/fire.mp4&quot; autoplay muted&gt;&lt;/video&gt;
 &lt;/div&gt;
-
+ &lt;audio
+      src=&quot;./critters/audio/fire.mp3&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+    &gt;&lt;/audio&gt;
 &lt;script&gt;
   (function () {
     const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
     const { getVar, getDiceElemsGivenName, addToDice, setVarValue } =
       window.SugarCube.setup;
     const critterInfo = getVar(&quot;critterInfo&quot;);
+    const sacrificed = getVar(&quot;sacrificed&quot;);
     const availableDice = getVar(&quot;availableDice&quot;);
-    console.log(availableDice)
     //  for (let name of Object.keys(critterInfo)) {
     for (let name of availableDice) {
       sourceElem.appendChild(getDiceElemsGivenName(name));
@@ -1184,18 +1220,13 @@ document.onmousedown = (event) =&gt; {
       const critterName = draggedElem.dataset.char;
       setVarValue(&quot;chosen&quot;, critterName);
       const playerScore = getVar(&quot;playerScore&quot;);
+      setVarValue(&quot;sacrificed&quot;, sacrificed.add(critterName));
+      console.log(sacrificed)
       setVarValue(&quot;playerScore&quot;, playerScore + critterInfo[critterName].points);
-      console.log(&#39;changes the variable?&#39;)
 		availableDice.splice(availableDice.indexOf(critterName), 1)
       window.goToPage(&quot;sacrifice&quot;);
     }
-    window.addDrag(callback);
-    const buttons = document.getElementsByClassName(&quot;source&quot;);
-    for (let button of buttons) {
-      button.addEventListener(&quot;click&quot;, function (e) {
-        console.log(button.id);
-      });
-    }
+    window.addDrag(callback); 
   })();
 &lt;/script&gt;
 </tw-passagedata><tw-passagedata pid="11" name="sacrifice" tags="" position="350,200" size="100,100">&lt;video id=&#39;sacrifice&#39; autoplay loop src=&quot;./critters/img/smoke.mp4&quot; autoplay muted&gt;&lt;/video&gt;
@@ -1203,19 +1234,25 @@ document.onmousedown = (event) =&gt; {
 &lt;div class=&quot;content&quot;&gt;
 &lt;div class=&#39;show&#39;&gt;&lt;/div&gt;
 &lt;p&gt;&lt;&lt;link `$chosen + &quot; was sacrificed&quot;` &quot;battle&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/p&gt;
+&lt;p id=&#39;obituary&#39;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;span id=&quot;stats-str&quot;&gt;New energy: &lt;&lt;print $playerScore&gt;&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
-
+ &lt;audio
+      src=&quot;./critters/audio/gong.m4a&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+    &gt;&lt;/audio&gt;
 &lt;script&gt;
 (function () {
 		const link = document.querySelector(&#39;.link-internal&#39;)
 link.textContent = window.capitalizeFirstLetter(link.textContent)
   const { getImageFromCritterName, getVar, getFieldFromCritterWithName } = window.SugarCube.setup;
   const chosenCritterName = getVar(&#39;chosen&#39;)
+const   critterInfo= getVar(&#39;critterInfo&#39;)
 link.textContent += `  for ${getFieldFromCritterWithName(&#39;points&#39;, chosenCritterName)} points.`;
   if (chosenCritterName) {
   document.getElementsByClassName(&#39;show&#39;)[0].prepend(getImageFromCritterName(chosenCritterName));
-
+  document.getElementById(&#39;obituary&#39;).textContent = critterInfo[chosenCritterName].obituary;
   }
   
 document.onmousedown = (event) =&gt; {
@@ -1223,34 +1260,34 @@ document.onmousedown = (event) =&gt; {
 }
 })();
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="12" name="help" tags="" position="650,225" size="100,100">&lt;div class=&#39;large help&#39;&gt;
-&lt;p&gt;You: [[Take me to the Mystery Man]].&lt;/p&gt;
-
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="12" name="help" tags="" position="650,225" size="100,100">&lt;div class=&quot;large help&quot;&gt;
+  &lt;p&gt;You: [[Take me to the Mystery Man]].&lt;/p&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
-(function () {
-const helpElem = document.getElementsByClassName(&#39;help&#39;)[0]
-const pElem = document.createElement(&quot;p&quot;);
-const {getRandomCritterOfNum, getFieldFromCritterWithName, getImageFromCritterName, } = window.SugarCube.setup
+  (function () {
+    const helpElem = document.getElementsByClassName(&quot;help&quot;)[0];
+    const pElem = document.createElement(&quot;p&quot;);
+    const { getRandomCritterOfNum, getImageFromCritterName, getVar } =
+      window.SugarCube.setup;
 
-const name = getRandomCritterOfNum(1)[0]
+    const name = getRandomCritterOfNum(1)[0];
 
-  helpElem.prepend(getImageFromCritterName(name));
-  	const anotherPElem = document.createElement(&quot;p&quot;);
-	anotherPElem.textContent = `${window.capitalizeFirstLetter(name)}: ${getFieldFromCritterWithName(name, &#39;opening&#39;)}`;
-  helpElem.prepend(anotherPElem);
+    helpElem.prepend(getImageFromCritterName(name));
+    const anotherPElem = document.createElement(&quot;p&quot;);
+    anotherPElem.textContent = `${window.capitalizeFirstLetter(name)}: ${getVar(&quot;critterInfo&quot;)[name].opening}`;
+    helpElem.prepend(anotherPElem);
 
-document.onmousedown = (event) =&gt; {
-	const link = document.querySelector(&#39;.link-internal&#39;)
-    if (link) link.click()
-}
-})();
-
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="13" name="Take me to the Mystery Man" tags="" position="500,275" size="100,100">&lt;div class=&#39;center&#39;&gt;
+    document.onmousedown = (event) =&gt; {
+      const link = document.querySelector(&quot;.link-internal&quot;);
+      if (link) link.click();
+    };
+  })();
+&lt;/script&gt;
+</tw-passagedata><tw-passagedata pid="13" name="Take me to the Mystery Man" tags="" position="500,275" size="100,100">&lt;div class=&#39;center&#39;&gt;
 &lt;p&gt;You: Who are you? And why are you destroying the forest?&lt;/p&gt;
 &lt;div class=&quot;wrap&quot;&gt; &lt;div class=&quot;eye blink&quot;&gt;&lt;/div&gt;&lt;div class=&quot;eye blink&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Mystery Man: Let’s play a game of wits. If you win I’ll leave. If you lose we’ll play again.&lt;/p&gt;
+&lt;p&gt;Mystery Man: Let’s play a game. If you win I’ll leave. If you lose we’ll play again.&lt;/p&gt;
 &lt;p&gt;You: [[Okay-&gt;pick 2]]&lt;/p&gt;
 &lt;/div&gt;
 &lt;script&gt;
