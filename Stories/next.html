@@ -104,814 +104,230 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="next" startnode="5" creator="Twine" creator-version="2.10.0" format="SugarCube" format-version="2.37.3" ifid="DF00A6CB-C23C-4C9E-A8E5-48CCFF91D1C8" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">* {
-  margin: 0;
-  padding: 0;
-}
-body {
-  margin-left: 3.5em;
-  background: black;
-}
-#story {
-	margin: 2% 0;
-      padding: 0;
-}
-.passage {
-  line-height: 1.4;
-}
-.two {
-    max-width: 440px;
-    margin: 0 auto;
-}
-.blockImage {
-  display: block;
-  margin: 0 auto;
-}
-a.link-internal {
-  color: white;
-}
-svg {
-  position: absolute;
-  bottom: 0px;
-  left: 50%;
-  transform: translate(-50%);
-}
-#challengeZone,
-.flex {
-  display: flex;
-  row-gap: 8px;
-}
-#passage-battle {
-    max-width: 600px;
-} 
-.flex {
-	justify-content: space-between;
-}
-#ui-bar {
-  display: none;
-}
-/* button */ 
-button {
-  border: 2px solid;
-  font: inherit;
-  line-height: 1;
-	margin: 0.5em 0 0 0;
-    padding: 1em;
-  border-radius: 300px; 
-  background: orange;
-  color: black;
-  font-size: 18px;
-}
-button:disabled {
-  color: white;
-}
-button:hover, button:focus {
-  color: orange;
-  background: black;
-  border-color: orange;
-      -webkit-box-shadow: 0 0.5em 0.5em -0.4em orange;
-          box-shadow: 0 0.5em 0.5em -0.4em orange;
-  -webkit-transform: translateY(-0.25em);
-          transform: translateY(-0.25em);
-}
-#moreDice {
-    padding: 0.5em;
-}
-/* videos */
-#sacrifice {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  min-width: 100%;
-  min-height: 100%;
-}
-#replenish video {
-  position: absolute;
-  bottom: 0;
-  max-width: 600px;
-  z-index: -1;
-}
-#replenish {
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  max-width: 600px;
-  background: transparent;
-  height: 300px;
-  left: 30%;
-}
-
-/* Add some content at the bottom of the video/page */
-.content {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 0 0 20px 0;
-}
-
-/* recruit circle */
-.box {
-  border-radius: 50%;
-  mask: radial-gradient(transparent 120px, black 100px);
-}
-.box:before {
-  content: "";
-  display: block;
-  padding-top: 100%;
-}
-
-.container {
-  margin: 0 auto;
-  max-width: 300px;
-}
-.container .dropzone {
-	background: orange;
-  width: 300px;
-}
-/* end recruit circle */
-.pick {
-  text-align: center;
-  display: flex;
-  height: 200px;
-}
-p {
-  margin: 4px 0;
-  text-align: center;
-  color: white;
-  font-size: 2em;
-}
-.end img {
-	width: 200px;
-  	height: 200px;
-}
-.source {
-  height: 220px;
-  border-radius: 0;
-/*  width: 460px;*/
-  justify-content: center;
-max-width: 860px;
-  margin: 0 auto;
-}
-/* eye */
-.center .wrap {
-	margin: 0 auto;
-}
-.wrap {
-  position: relative;
-  width: 440px;
-  height: 40px;
-  margin: 0 auto;
-}
-.wrap .eye {
-    position: absolute;
-    background: white;
-    width: 200px;
-    height: 40px;
-    border-radius: 100px / 50px;
-} 
-/* pupil */
-.wrap .eye:before {
-  content: "";
-  position: absolute;
-  margin: auto;
-  width: 20px;
-  height: 20px;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border-radius: 50%;
-  background: black;
-}
-.wrap .eye.grin:after {
-  content: "";
-  position: absolute;
-  width: calc(100% + 20px);
-  height: 0;
-  border-radius: 50%;
-  background: black;
-  left: -10px;
-}
-.wrap .eye.grin:after {
-  bottom: -10px;
-}
-
-.wrap .eye:first-child {
-  left: 0;
-}
-.wrap .eye:last-child {
-  right: 0;
-}
-.wrap .eye.blink {
-  -webkit-animation: blink 4s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
-          animation: blink 4s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
-}
-.wrap .eye.grin:before {
-  -webkit-animation: grinb 4s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
-          animation: grinb 4s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
-}
-.wrap .eye.grin:after {
-  -webkit-animation: grina 4s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
-          animation: grina 4s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
-}
-.wrap .eye.down:before {
-  -webkit-animation: sadb 4s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
-          animation: sadb 4s cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
-}
-
-@-webkit-keyframes blink {
-  0%, 8% {
-    height: 40px;
-  }
-  10%, 12% {
-    height: 5px;
-  }
-  14%, 100% {
-    height: 40px;
-  }
-}
-
-@keyframes blink {
-  0%, 8% {
-    height: 40px;
-  }
-  10%, 12% {
-    height: 5px;
-  }
-  14%, 100% {
-    height: 40px;
-  }
-}
-@-webkit-keyframes grinb {
-  0%, 10% {
-    bottom: 0;
-  }
-  20%, 40% {
-    bottom: 50%;
-  }
-  50%, 100% {
-    bottom: 0;
-  }
-}
-@keyframes grinb {
-  0%, 10% {
-    bottom: 0;
-  }
-  20%, 40% {
-    bottom: 50%;
-  }
-  50%, 100% {
-    bottom: 0;
-  }
-}
-@-webkit-keyframes grina {
-  0%, 10% {
-    height: 0;
-  }
-  20%, 40% {
-    height: 100%;
-  }
-  50%, 100% {
-    height: 0;
-  }
-}
-@keyframes grina {
-  0%, 10% {
-    height: 0;
-  }
-  20%, 40% {
-    height: 100%;
-  }
-  50%, 100% {
-    height: 0;
-  }
-}
-@-webkit-keyframes sadb {
-  0%, 10% {
-    top: 0;
-  }
-  20%, 40% {
-    top: 50%;
-  }
-  50%, 100% {
-    top: 0;
-  }
-}
-@keyframes sadb {
-  0%, 10% {
-    top: 0;
-  }
-  20%, 40% {
-    top: 50%;
-  }
-  50%, 100% {
-    top: 0;
-  }
-}
-/* drag */
-.draggable {
-  text-align: center;
-  background: white;
-  color: black;
-  margin-right: 4px;
-  margin-top: auto;
-  width: 140px;
-}
-#battleZone {
-  height: 240px;
-    width: 100%;
-    max-width: 460px;
-  background-image: url(./critters/img/table.jpg);
-  margin: 0;
-}
-#challengeZone .dropzone {
-	border-radius: 18px;
-    width: 120px;
-    height: 120px;
-    font-size: 2.8em;
-  line-height: normal;
-}
-.dropzone {
-  width: 200px;
-  height: 160px;
-  background: orange;
-  color: black;
-  font-weight: bold;
-  margin: 10px;
-}
-
-.dragging {
-  opacity: 0.5;
-}
-/* battery */
-.battery {
-    width: 100px;
-    height: 220px;
-    position: relative;
-    border: 5px solid white;
-    margin: 10px 0 0 0;
-}
-
-.battery:before {
-  content:"\a0";
-  background-color: white;
-  position: absolute;
-  top: -15px;
-  height: 10px;
-  width: 50%;
-  left: 25%;
-}
-.battery:after {
-    content: attr(data-fill);
-    color: white;
-    font-size: 90px;
-    display: block;
-    position: relative;
-    text-align: center;
-}
-.battery > div {
-  background-color: orange;
-  position: absolute;
-  bottom: 0;
-  width: 96%;
-  margin: 2%;
-}
-
-/* dice */
-.perspective {
-  perspective: 50em;
-  display: flex;
-}
-.parent {
-  display: block;
-  width: 3em;
-}
-.child {
-  width: 6em;
-  height: 6em;
-  display: inline-block;
-  border: 1px solid rgba(0, 0, 0, 0.5);
-  transform: rotateX(60deg);
-  background-size: cover;
-  border-radius: 20px;
-  background: white;
-  /* 
-    background-image: url('./critters/img/dice/die1.png');
-  */
-}
-.perspective button:hover {
-  cursor: pointer;
-}
-.dropzone button,
-.source button {
-  padding: 0;
-  margin: 0;
-  border: none;
-  background: none;
-  border-radius: 0;
-}
-.square {
-  border-radius: 8px;
-  display: block;
-  width: 6em;
-  height: 6em;
-  border: 1px solid black;
-  margin: -1.6em 0 0 0;
-  background-size: cover;
-  /*
-  background-image: url('./critters/img/animals/crow_2.png')
-  */
-}
-/* tooltip */
-.wrapper {
-  text-transform: uppercase;
-  color: #555;
-  cursor: help;
-  font-family: "Gill Sans", Impact, sans-serif;
-  font-size: 20px;
-  margin: 100px 75px 10px 75px;
-  padding: 15px 20px;
-  position: relative;
-  text-align: center;
-  margin: 0;
-  font-weight: 400;
-    border-radius: 8px;
-  -webkit-transform: translateZ(0); /* webkit flicker fix */
-  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
-}
-.tooltip span {
-  display: block;
-}
-.wrapper .tooltip {
-  background: white;
-  border: 1px solid black;
-  bottom: 90%;
-  color: black;
-  display: block;
-  left: -20px;
-  opacity: 0;
-  padding: 12px;
-  pointer-events: none;
-  position: absolute;
-  width: 200px;
-}
-
-/* This bridges the gap so you can mouse into the tooltip without it disappearing */
-.wrapper .tooltip:before {
-  bottom: -20px;
-  content: " ";
-  display: block;
-  height: 20px;
-  left: 0;
-  position: absolute;
-  width: 100%;
-}
-
-/* CSS Triangles - see Trevor's post */
-.wrapper .tooltip:after {
-  border-left: solid black 10px;
-  border-right: solid black 10px;
-  border-top: solid white 10px;
-  bottom: -10px;
-  content: " ";
-  height: 0;
-  left: 50%;
-  margin-left: -13px;
-  position: absolute;
-  width: 0;
-}
-
-.wrapper:focus .tooltip {
-  opacity: 1;
-  pointer-events: auto;
-}
-</style><script role="script" id="twine-user-script" type="text/twine-javascript">window.goToPage = function (passageName) {
-  Engine.play(passageName);
-};
-// return [0, max)
-window.getRandomInt = (max) => {
-  return Math.floor(Math.random() * max);
-};
-// in-place
-window.shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
-  }
-  return array;
-};
-// solvers
-const sumTo = (target) => {
-  return {
-    display: ["sum", target],
-    solver: () => {
-      return true; // remove the dice
+	<tw-storydata name="next" startnode="5" creator="Twine" creator-version="2.10.0" format="SugarCube" format-version="2.37.3" ifid="DF00A6CB-C23C-4C9E-A8E5-48CCFF91D1C8" options="" tags="" zoom="1" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">// Grab a loading screen lock
+var lsLockId = LoadScreen.lock();
+importStyles( "./critters/css/global.css").then(function () {
+	importScripts("./critters/js/global.js")
+  })
+  .then(function () {
+  LoadScreen.unlock(lsLockId);  
+  // solvers
+  const sumTo = (target) => {
+    return {
+      display: ["sum", target],
+      solver: () => {
+        return true; // remove the dice
+      },
+      remainder: (target, nums) => {
+        return target - nums.reduce((acc, c) => (c += acc), 0);
+      },
+    };
+  };
+  const isNum = (target) => {
+    return {
+      display: ["is", target],
+      solver: (val, target) => val === target,
+    };
+  };
+  const isSmaller = (target) => {
+    return {
+      display: ["smaller", target],
+      solver: (val, target) => val < target,
+    };
+  };
+  const isLarger = (target) => {
+    return {
+      display: ["larger", target],
+      solver: (val, target) => val > target,
+    };
+  };
+  const isEven = () => {
+    return {
+      display: ["is", "EVEN"],
+      solver: (val) => val % 2 === 0,
+    };
+  };
+  const isOdd = () => {
+    return {
+      display: ["is", "ODD"],
+      solver: (val) => val % 2 === 1,
+    };
+  };
+  const imagePrefix = "./critters/img/animals/";
+  // get dice DOM elements
+  State.variables.critterInfo = {
+    bunny: {
+      points: 3,
+      special: "Rolls 1-6",
+      roll: () => getDiceRoll(),
+      image: imagePrefix + "bunny.png",
+      scaredImage: imagePrefix + "bunny2.png",
+      opening:
+        "The Enchanted Forest is flooded by an evil wizard! Only you can save us",
+      obituary: "She's a loving mother who's survived by 30 children.",
     },
-    remainder: (target, nums) => {
-      return target - nums.reduce((acc, c) => (c += acc), 0);
+    moose: {
+      points: 3,
+      special: "Rolls odd",
+      roll: () => getDiceRoll([1, 3, 5]),
+      image: imagePrefix + "moose.jpeg",
+            scaredImage: imagePrefix + "moose2.png",
+      opening:
+        "He moves at night. No plants grow where he treads. We need you to fight the Mystery Man.",
+      obituary:
+        "The last in line in a family of roadkills, he finally found peace and gallops in Heaven.",
+    },
+    fish: {
+      points: 3,
+      special: "Rolls even",
+      roll: () => getDiceRoll([2, 4, 6]),
+      image: imagePrefix + "fish.png",
+      scaredImage: imagePrefix + "fish2.png",
+      opening: "He's drying up lakes and rivers! Please fight the Mystery Man!",
+      obituary:
+        "An avid reader, his favorite tale was the 'Little Mermaid'.",
+    },
+    pig: {
+      points: 5,
+      special: "Rolls <4",
+      roll: () => getDiceRoll([1, 2, 3]),
+      image: imagePrefix + "pig.png",
+      scaredImage: imagePrefix + "pig2.png",
+      opening:
+        "The Mystery Man wiped out all the fruits in the Enchanted Forest! We have nothing to eat.",
+      obituary:
+        "A truffle-finding champion and a painter, he painted 100+ works of still-life with fruits.",
+    },
+    turtle: {
+      points: 5,
+      roll: () => getDiceRoll([4, 5, 6]),
+      special: "Rolls >3",
+      image: imagePrefix + "turtle.jpeg",
+      scaredImage: imagePrefix + "turtle2.png",
+      opening:
+        "I've never seen someone like him in my 100+ years. We need you to defeat the Mystery Man.",
+      obituary:
+        "A lifelong tai-chi practioner, he was a big donor to the Turtle Tai Chi Foundation.",
+    },
+    crow: {
+      points: 5,
+      roll: () => getDiceRoll(),
+      special: "Rolls 1-6. Re-rolls dice in front",
+      image: imagePrefix + "crow.png",
+      scaredImage: imagePrefix + "crow2.png",
+      opening: "CAW CAW CAW! Mystery Man set the Enchanted Forest ON FIRE!",
+      obituary: "Master hoarder left behind a tree full of shiny trinkets.",
     },
   };
-};
-/*
-console.log(sumTo(10).display[0] === "sum" && sumTo(10).display[1] === 10);
-const s = sumTo(10).solver;
-console.log([s(1) == false, s(2) == false, s(7) == true].every((c) => c));
-*/
-const isNum = (target) => {
-  return {
-    display: ["is", target],
-    solver: (val, target) => val === target,
+  setup.getRandomCritterOfNum = (counter) => {
+    const critterNames = Object.keys(State.variables.critterInfo);
+    window.shuffleArray(critterNames);
+    // return array of length counter
+    return critterNames.slice(0, counter);
   };
-};
-const isSmaller = (target) => {
-  return {
-    display: ["smaller", target],
-    solver: (val, target) => val < target,
+  setup.getFieldFromCritterWithName = (field, name) => {
+    return State.variables.critterInfo[name] !== undefined
+      ? State.variables.critterInfo[name][field]
+      : "";
   };
-};
-const isLarger = (target) => {
-  return {
-    display: ["larger", target],
-    solver: (val, target) => val > target,
+
+  setup.getImageFromCritterName = (name) => {
+    const img = document.createElement("img");
+    img.classList.add("blockImage");
+    img.src = State.variables.critterInfo[name].image;
+    return img;
   };
-};
-/*
-console.log(isNum(6).display[0] === "is" && isNum(6).display[1] === 6);
-const i = isNum(1).solver;
-console.log([i(1) == true, i(2) == false, i(7) == false].every((c) => c));
-*/
-const isEven = () => {
-  return {
-    display: ["is", "EVEN"],
-    solver: (val) => val % 2 === 0,
+
+  const getPElem = (content) => {
+    const pElem = document.createElement("span");
+    pElem.textContent = content;
+    return pElem;
   };
-};
-/*
-console.log(isEven().display[0] === "is" && isEven().display[1] === "even");
-console.log(
-  [isEven().solver(1) == false, isEven().solver(2) == true].every((c) => c)
-);
-*/
-const isOdd = () => {
-  return {
-    display: ["is", "ODD"],
-    solver: (val) => val % 2 === 1,
+
+  const getSpeechElemFromName = (name, points, special) => {
+    const toolTipElem = document.createElement("span");
+    toolTipElem.classList.add("tooltip");
+
+    toolTipElem.appendChild(getPElem(name));
+    toolTipElem.appendChild(getPElem("Points: " + points));
+    toolTipElem.appendChild(getPElem(special));
+    return toolTipElem;
   };
-};
-/*
-console.log(isOdd(6).display[0] === "is" && isOdd(6).display[1] === "odd");
-console.log(
-  [isOdd(1).solver == true, isOdd(2).solver == false].every((c) => c)
-);
-*/
-window.batteryUpdate = (battery, fill = null, max = null) => {
-  var max  = battery.getAttribute('data-max')
-  var fill = battery.getAttribute('data-fill')
 
-  // if no max, default to percent of 100
-  var perc = (max) ? fill / max * 100 : fill;
+  setup.getDiceElemsGivenName = (name) => {
+    const { image, points, special } = State.variables.critterInfo[name];
+    const buttonElem = document.createElement("button");
+    buttonElem.classList.add("wrapper");
+    const parentElem = document.createElement("span");
+    parentElem.classList.add("parent");
 
-  if (!isNaN(fill)) {
-    for (let child of battery.children) {
-      child.style.height = perc + '%'
-    }
-  }
-}
+    const squareElem = document.createElement("span");
+    squareElem.classList.add("square");
+    squareElem.style.backgroundImage = "url('" + image + "')";
 
+    const childElem = document.createElement("span");
+    childElem.classList.add("child");
 
-const imagePrefix = "./critters/img/animals/";
-window.getDiceRoll = (availableResults) => {
-  if (availableResults === undefined) return 1 + window.getRandomInt(6);
-  return availableResults[window.getRandomInt(availableResults.length)];
-};
-// get dice DOM elements
-State.variables.critterInfo = {
-  bunny: {
-    points: 3,
-    special: "Rolls 1-6",
-    roll: () => getDiceRoll(),
-    image: imagePrefix + "bunny.png",
-    opening:
-      "The Enchanted Forest is flooded by an evil wizard! Only you can save us",
-    obituary: "She's a loving mother who's survived by 30 children.",
-  },
-  moose: {
-    points: 3,
-    special: "Rolls odd",
-    roll: () => getDiceRoll([1, 3, 5]),
-    image: imagePrefix + "moose.jpeg",
-    opening:
-      "He moves at night. No plants grow where he treads. We need you to fight the Mystery Man.",
-    obituary: "The last in line in a family of roadkills, he finally found peace and gallops in Heaven.",
-  },
-  fish: {
-    points: 3,
-    special: "Rolls even",
-    roll: () => getDiceRoll([2, 4, 6]),
-    image: imagePrefix + "fish.png",
-    opening:
-      "He's drying up lakes and rivers! Please fight the Mystery Man!",
-    obituary: "The first reader of his family, his favorite tale was the 'Little Mermaid'.",
-  },
-  pig: {
-    points: 5,
-    special: "Rolls <4",
-    roll: () => getDiceRoll([1, 2, 3]),
-    image: imagePrefix + "pig.png",
-    opening:
-      "The Mystery Man wiped out all the fruits in the Enchanted Forest! We have nothing to eat.",
-    obituary: "A truffle-finding champion and a painter, he painted 100+ works of still-life with fruits.", 
-  },
-  turtle: {
-    points: 5,
-    roll: () => getDiceRoll([4, 5, 6]),
-    special: "Rolls >3",
-    image: imagePrefix + "turtle.jpeg",
-    opening:
-      "I've never seen someone like him in my 100+ years. We need you to defeat the Mystery Man.",
-    obituary: "A lifelong tai-chi practioner, he was a big donor to the Turtle Tai Chi Foundation.",
-  },
-  crow: {
-    points: 5,
-    roll: () => getDiceRoll(),
-    special: "Rolls 1-6. Re-rolls dice in front",
-    image: imagePrefix + "crow.png",
-    opening: "CAW CAW CAW! Mystery Man set the Enchanted Forest ON FIRE!",
-    obituary: "Master hoarder left behind a tree full of shiny trinkets.",
-  },
-};
-window.capitalizeFirstLetter = (text) =>
-  text.substr(0, 1).toUpperCase() + text.substr(1);
-setup.getRandomCritterOfNum = (counter) => {
-  const critterNames = Object.keys(State.variables.critterInfo);
-  window.shuffleArray(critterNames);
-  // return array of length counter
-  return critterNames.slice(0, counter);
-};
-setup.getFieldFromCritterWithName = (field, name) => {
-  return State.variables.critterInfo[name] !== undefined
-    ? State.variables.critterInfo[name][field]
-    : "";
-};
+    buttonElem.dataset.char = name;
+    buttonElem.classList.add("draggable");
+    buttonElem.setAttribute("draggable", "true");
+    parentElem.appendChild(childElem);
+    parentElem.appendChild(squareElem);
+    buttonElem.appendChild(parentElem);
+    buttonElem.appendChild(getSpeechElemFromName(name, points, special));
+    return buttonElem;
+  };
+  State.variables.playerScore = 15;
+  setup.getBattery = (isHorizontal) => {
+    // <div class="battery" data-max="15" data-fill="15">
+    const batteryElem = document.createElement("div");
+    batteryElem.classList.add("battery");
+    if (isHorizontal) batteryElem.classList.add("horizontal");
+    batteryElem.style = 'margin: 0 auto;'
+    batteryElem.dataset.max = 15;
+    batteryElem.dataset.fill = State.variables.playerScore;
+    batteryElem.appendChild(document.createElement("div"));
+	window.batteryUpdate(batteryElem)
+    return batteryElem;
+  };
+  State.variables.originalAvailableDice = ["bunny", "bunny", "bunny"];
+  State.variables.availableDice = [...State.variables.originalAvailableDice];
+  State.variables.originalChallenges = [
+    [isEven()],
+    [isSmaller(5), isLarger(2)],
+    [sumTo(6), isOdd()],
+    [sumTo(6), isNum(2)],
+    [isLarger(2), isLarger(1), isLarger(3)],
+    [isNum(1), isLarger(4), isSmaller(3)],
+  ];
+  State.variables.challenges = [...State.variables.originalChallenges];
+  setup.getVar = function (name) {
+    return State.variables[name];
+  };
+  setup.shuffleDice = function (name) {
+    State.variables[name];
+  };
+  setup.setVarValue = function (name, value) {
+    State.variables[name] = value;
+  };
 
-setup.getImageFromCritterName = (name) => {
-  const img = document.createElement("img");
-  img.classList.add("blockImage");
-  img.src = State.variables.critterInfo[name].image;
-  return img;
-};
+  setup.addToDice = function (name) {
+    State.variables.availableDice.push(name);
+  };
 
-const getPElem = (content) => {
-  const pElem = document.createElement("span");
-  pElem.textContent = content;
-  return pElem;
-};
+  setup.increaseScore = function (amount) {
+    State.variables.playerScore += amount;
+  };
 
-const getSpeechElemFromName = (name, points, special) => {
-  const toolTipElem = document.createElement("span");
-  toolTipElem.classList.add("tooltip");
-
-  toolTipElem.appendChild(getPElem(name));
-  toolTipElem.appendChild(getPElem("Points: " + points));
-  toolTipElem.appendChild(getPElem(special));
-  return toolTipElem;
-};
-
-setup.getDiceElemsGivenName = (name) => {
-  const { image, points, special } = State.variables.critterInfo[name];
-  const buttonElem = document.createElement("button");
-  buttonElem.classList.add("wrapper");
-  const parentElem = document.createElement("span");
-  parentElem.classList.add("parent");
-
-  const squareElem = document.createElement("span");
-  squareElem.classList.add("square");
-  squareElem.style.backgroundImage = "url('" + image + "')";
-
-  const childElem = document.createElement("span");
-  childElem.classList.add("child");
-
-  buttonElem.dataset.char = name;
-  buttonElem.classList.add("draggable");
-  buttonElem.setAttribute("draggable", "true");
-  parentElem.appendChild(childElem);
-  parentElem.appendChild(squareElem);
-  buttonElem.appendChild(parentElem);
-  buttonElem.appendChild(getSpeechElemFromName(name, points, special));
-  return buttonElem;
-};
-State.variables.playerScore = 15;
-setup.getBattery = () => {
-// <div class="battery" data-max="15" data-fill="15">
-	const batteryElem = document.createElement("div");
-  batteryElem.classList.add('battery')
-  batteryElem.dataset.max = 15
-  batteryElem.dataset.fill = State.variables.playerScore
-  batteryElem.appendChild(document.createElement("div"))
-  return batteryElem
-}
-State.variables.originalAvailableDice = ["bunny", "bunny", "bunny"];
-State.variables.availableDice = [...State.variables.originalAvailableDice];
-State.variables.originalChallenges = [
-/*  [isEven(), isOdd()],
-  [isSmaller(5), isLarger(2)],
-  [sumTo(6), isNum(2)],
-  [isEven(), isLarger(3)],
-  [isLarger(2), isLarger(1), isLarger(3)],
-
-  [isSmaller(2), isLarger(4), isLarger(3), isSmaller(3)],
-    */
-    [sumTo(6), sumTo(6), sumTo(6)],
-];
-State.variables.challenges = [...State.variables.originalChallenges];
-setup.getVar = function (name) {
-  return State.variables[name];
-};
-setup.shuffleDice = function (name) {
-  State.variables[name];
-};
-setup.setVarValue = function (name, value) {
-  State.variables[name] = value;
-};
-
-setup.addToDice = function (name) {
-  State.variables.availableDice.push(name);
-};
-
-setup.increaseScore = function (amount) {
-  State.variables.playerScore += amount;
-};
-
-State.variables.sacrificed = new Set();
-State.variables.chosen = "";
-
-// checkFunc: return true to pass, false to reject
-// onSuccessFunc: runs on successful drop
-window.addDrag = function (onSuccessFunc, checkFunc) {
-  let dragged;
-
-  /* events fired on the draggable target */
-  const sources = document.getElementsByClassName("draggable");
-  for (let source of sources) {
-    // using 'on' to only set once
-    source.ondragstart = (event) => {
-      // store a ref. on the dragged elem
-      dragged = event.target;
-      // make it half transparent
-      event.target.classList.add("dragging");
-    };
-
-    source.ondragend = (event) => {
-      // reset the transparency
-      event.target.classList.remove("dragging");
-    };
-  }
-
-  /* events fired on the drop targets */
-  const targets = document.getElementsByClassName("drop-target");
-  for (let target of targets) {
-    target.ondragover = (event) => {
-      // prevent default to allow drop
-      event.preventDefault();
-    };
-
-    target.ondragenter = (event) => {
-      // highlight potential drop target when the draggable element enters it
-      if (event.target.classList.contains("dropzone")) {
-        event.target.classList.add("dragover");
-      }
-    };
-
-    target.ondragleave = (event) => {
-      // reset background of potential drop target when the draggable element leaves it
-      if (event.target.classList.contains("dropzone")) {
-        event.target.classList.remove("dragover");
-      }
-    };
-
-    target.ondrop = (event) => {
-      if (!dragged) return;
-      // prevent default action (open as link for some elements)
-      event.preventDefault();
-      if (checkFunc !== undefined && !checkFunc(dragged, event.target)) return;
-      // move dragged element to the selected drop target
-      if (event.target.classList.contains("dropzone")) {
-        event.target.classList.remove("dragover");
-        event.target.appendChild(dragged);
-        onSuccessFunc(event.target, dragged);
-      }
-    };
-  }
-};
+  State.variables.sacrificed = new Set();
+  State.variables.chosen = "";
+});
 </script><tw-passagedata pid="1" name="end" tags="" position="850,375" size="100,100">&lt;p&gt;The Mystery Man DISAPPEARED, as promised.&lt;/p&gt;
-&lt;p id=&#39;end&#39;&gt;The critters are safe.&lt;/p&gt;
+&lt;p id=&#39;end&#39;&gt;&lt;/p&gt;
 &lt;&lt;print $sacrificed&gt;&gt;.
 &lt;div class=&#39;flex two&#39;&gt;
 &lt;&lt;button [[PLAY AGAIN-&gt;help]]&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;button [[Nah I&#39;m good-&gt;start]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+&lt;&lt;button [[NO THANKS-&gt;start]]&gt;&gt;&lt;&lt;/button&gt;&gt;
  &lt;audio
       src=&quot;./critters/audio/happyEnd.mp3&quot;
       type=&quot;audio/mpeg&quot;
@@ -926,14 +342,7 @@ window.addDrag = function (onSuccessFunc, checkFunc) {
         const { getVar, getImageFromCritterName } =
       window.SugarCube.setup;
     const sacrificed = getVar(&quot;sacrificed&quot;);
-const str = document.getElementById(&#39;end&#39;).textContent;
-// remove the period
-if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = str.substr(0, str.length-1) + &#39; thanks to the sacrifice(s) below.&#39;
-    const critterInfo = getVar(&quot;critterInfo&quot;);
-    //  for (let name of Object.keys(critterInfo)) {
-    for (let name of sacrificed) {
-      sourceElem.appendChild(getImageFromCritterName(name));
-    } 
+if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = &#39;Click to learn more about the sacrificed.&#39;;
   })();
 &lt;/script&gt;
 </tw-passagedata><tw-passagedata pid="2" name="pick 2" tags="" position="350,50" size="100,100">&lt;p&gt;Drag 2 critters to join the cause.&lt;/p&gt;
@@ -943,7 +352,11 @@ if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = str.
 &lt;&lt;set $availableDice to $originalAvailableDice&gt;&gt;
 &lt;&lt;set $challenges to $originalChallenges&gt;&gt;
 &lt;&lt;set $playerScore to 15&gt;&gt;
-
+  &lt;audio
+      src=&quot;./critters/audio/pick.mp3&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+    &gt;&lt;/audio&gt;
 &lt;script&gt;
 (function () {
   const dropAudio =  new Audio(&quot;./critters/audio/drop.mp3&quot;);
@@ -967,28 +380,28 @@ if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = str.
 })();
 
 &lt;/script&gt;
-</tw-passagedata><tw-passagedata pid="3" name="battle" tags="" position="450,450" size="100,100">&lt;div class=&quot;wrap&quot;&gt;&lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;&lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;div id=&quot;challengeZone&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;flex&quot;&gt;&lt;div id=&quot;battleZone&quot; class=&quot;dropzone drop-target&quot;&gt;&lt;/div&gt;
+</tw-passagedata><tw-passagedata pid="3" name="battle" tags="" position="450,450" size="100,100">&lt;&lt;nobr&gt;&gt; 
+&lt;div class=&quot;wrap&quot;&gt;
+  &lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&quot;challengeZone&quot; style=&quot;margin: 4% 0;&quot;&gt;&lt;/div&gt;
+&lt;div class=&quot;flex&quot;&gt;
+  &lt;div id=&quot;battleZone&quot; class=&quot;dropzone drop-target&quot;&gt;&lt;/div&gt;
   &lt;div&gt;&lt;/div&gt;
-&lt;/div&gt; &lt;/div&gt;
-&lt;&lt;nobr&gt;&gt; 
+&lt;/div&gt;
 &lt;div class=&quot;flex&quot;&gt;
   &lt;div class=&quot;source&quot;&gt;&lt;/div&gt;
-  &lt;div style=&#39;width: 160px; margin: 18px 0 0 0;&#39;&gt;
+  &lt;div style=&quot;width: 160px; margin: 18px 0 0 0&quot;&gt;
     &lt;p id=&quot;diceLeft&quot;&gt;&lt;/p&gt;
     &lt;button id=&quot;moreDice&quot;&gt;More dice (-3 energy)&lt;/button&gt;
     &lt;button id=&quot;retry&quot;&gt;Retry (-2 energy)&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
- &lt;&lt;endnobr&gt;&gt; 
+&lt;&lt;endnobr&gt;&gt; 
 
- &lt;audio
-      src=&quot;./critters/audio/dice.mp3&quot;
-      type=&quot;audio/mpeg&quot;
-      autoplay
-    &gt;&lt;/audio&gt;
-    
+&lt;audio src=&quot;./critters/audio/dice.mp3&quot; type=&quot;audio/mpeg&quot; autoplay&gt;&lt;/audio&gt;
+
 &lt;script&gt;
   (function () {
     // add class  blink, grin, or down to eye
@@ -999,17 +412,11 @@ if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = str.
     }
 
     const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
-    const {
-      getBattery,
-      getFieldFromCritterWithName,
-      getDiceElemsGivenName,
-      getVar,
-      setVarValue,
-    } = window.SugarCube.setup;
-    
-    document.getElementsByClassName(&quot;flex&quot;)[0].appendChild(getBattery())
-//    window.batteryUpdate(batteryElem)
-	
+    const { getBattery, getDiceElemsGivenName, getVar, setVarValue } =
+      window.SugarCube.setup;
+
+    document.getElementsByClassName(&quot;flex&quot;)[0].appendChild(getBattery());
+
     const challenges = getVar(&quot;challenges&quot;);
     if (!challenges.length) return;
     const challenge = challenges.shift();
@@ -1024,58 +431,62 @@ if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = str.
       return text;
     };
     let diceIndex = 0;
-const batteryElem = document.getElementsByClassName(&#39;battery&#39;)[0]
-const diceAudio =  new Audio(&quot;./critters/audio/dice.mp3&quot;);
+    const batteryElem = document.getElementsByClassName(&quot;battery&quot;)[0];
+    const diceAudio = new Audio(&quot;./critters/audio/dice.mp3&quot;);
     const updatePlayerScore = (updateNum) =&gt; {
       let playerScore = getVar(&quot;playerScore&quot;);
       playerScore += updateNum;
       setVarValue(&quot;playerScore&quot;, playerScore);
-      batteryElem.dataset.fill = &#39;&#39; +playerScore
-  window.batteryUpdate(batteryElem)
+      batteryElem.dataset.fill = &quot;&quot; + playerScore;
+      window.batteryUpdate(batteryElem);
     };
-    updatePlayerScore(0)
-    document.getElementById(&quot;retry&quot;).addEventListener(&quot;click&quot;, (e) =&gt; {
-      diceAudio.play()
+    updatePlayerScore(0);
+    document.getElementById(&quot;retry&quot;).addEventListener(&quot;click&quot;, () =&gt; {
       updatePlayerScore(-2);
       if (getVar(&quot;playerScore&quot;) &lt;= 0) {
-        window.goToPage(&quot;lost&quot;);
-      } else {
-        // clear board
-        battleZoneElem.replaceChildren();
-        sourceElem.replaceChildren();
-        challengeZone.replaceChildren();
-        for (let obs of challenge) {
-          delete obs.nums
-        }
-        showInitialDice();
-        updateDiceLeft(); 
-        showChallenges();
+        return window.goToPage(&quot;lost&quot;);
       }
+      diceAudio.play();
+      // clear board
+      battleZoneElem.replaceChildren();
+      sourceElem.replaceChildren();
+      challengeElem.replaceChildren();
+      for (let obs of challenge) {
+        delete obs.nums;
+      }
+      showInitialDice();
+      updateDiceLeft();
+      showChallenges();
     });
 
-const rollAudio =  new Audio(&quot;./critters/audio/wood.m4a&quot;);
-const tapAudio =  new Audio(&quot;./critters/audio/tap.mp3&quot;);
-const bounceAudio =  new Audio(&quot;./critters/audio/bounce.mp3&quot;);
-const hmAudio =  new Audio(&quot;./critters/audio/hm.mp3&quot;);
+    const rollAudio = new Audio(&quot;./critters/audio/wood.m4a&quot;);
+    const tapAudio = new Audio(&quot;./critters/audio/tap.mp3&quot;);
+    const bounceAudio = new Audio(&quot;./critters/audio/bounce.mp3&quot;);
+    const hmAudio = new Audio(&quot;./critters/audio/hm.mp3&quot;);
 
-const rollDie = (draggedElem) =&gt; {
-const critterName = draggedElem.dataset.char;
-  rollAudio.play()
-  const randomInt = critters[critterName].roll();
-  draggedElem.dataset.value = randomInt;
-  draggedElem.focus()
-  setBackgroundImageToDice(draggedElem.querySelector(&quot;.child&quot;), randomInt);
-}
+    const rollDie = (draggedElem, previousNum) =&gt; {
+      const critterName = draggedElem.dataset.char;
+      rollAudio.play();
+      let randomInt = critters[critterName].roll();
+      while (randomInt == previousNum) {
+        randomInt = critters[critterName].roll();
+      }
+      draggedElem.dataset.value = randomInt;
+      draggedElem.focus();
+      setBackgroundImageToDice(draggedElem.querySelector(&quot;.child&quot;), randomInt);
+    };
     const critters = getVar(&quot;critterInfo&quot;);
     function callback(dropElem, draggedElem) {
       if (!dropElem || !draggedElem) return;
       if (dropElem.id === &quot;battleZone&quot;) {
-      rollDie(draggedElem)
+        rollDie(draggedElem);
         // re-roll dice in front
-        if (draggedElem.dataset.char === &#39;crow&#39;) {
+        if (draggedElem.dataset.char === &quot;crow&quot;) {
           if (battleZoneElem.children.length &gt; 1) {
             // get second last dice, since last dice is crow
-            setTimeout(() =&gt; rollDie(battleZoneElem.children[battleZoneElem.children.length-2]), 500)
+            const lastDie =
+              battleZoneElem.children[battleZoneElem.children.length - 2];
+            setTimeout(() =&gt; rollDie(lastDie, lastDie.dataset.value), 500);
           }
         }
       } else {
@@ -1089,7 +500,7 @@ const critterName = draggedElem.dataset.char;
           );
           if (remainder &gt; 0) {
             dropElem.textContent = remainder;
-            hmAudio.play()
+            hmAudio.play();
             return;
           }
         }
@@ -1138,11 +549,11 @@ const critterName = draggedElem.dataset.char;
           currChallenge.nums
         );
         if (bool === true) {
-        	// play some sfx
+          // play some sfx
         } else {
-        	bounceAudio.play()
+          bounceAudio.play();
         }
-        return bool
+        return bool;
       }
       return true;
     };
@@ -1156,7 +567,7 @@ const critterName = draggedElem.dataset.char;
       challenge.forEach((ch, index) =&gt; {
         const { display } = ch;
         const divElem = document.createElement(&quot;div&quot;);
-        if (display[0] === &quot;is&quot; &amp;&amp; typeof display[1] === &#39;number&#39;) {
+        if (display[0] === &quot;is&quot; &amp;&amp; typeof display[1] === &quot;number&quot;) {
           setBackgroundImageToDice(divElem, display[1]);
         } else {
           divElem.textContent = getChallengeText(display);
@@ -1170,8 +581,8 @@ const critterName = draggedElem.dataset.char;
     };
     showChallenges();
 
-    const availableDice = [...getVar(&#39;availableDice&#39;)] //Object.keys(critters); //[&#39;crow&#39;, &#39;crow&#39;, &#39;crow&#39;]
-	  window.shuffleArray(availableDice);    
+    const availableDice = [...getVar(&quot;availableDice&quot;)]; //Object.keys(critters); //[&#39;crow&#39;, &#39;crow&#39;, &#39;crow&#39;]
+    window.shuffleArray(availableDice);
 
     const showInitialDice = () =&gt; {
       diceIndex = 0;
@@ -1190,10 +601,13 @@ const critterName = draggedElem.dataset.char;
       moreDiceElem.disabled = availableDice.length &lt;= diceIndex;
     };
     updateDiceLeft();
-    
+
     moreDiceElem.addEventListener(&quot;click&quot;, (e) =&gt; {
       updatePlayerScore(-3);
-      diceAudio.play()
+      if (getVar(&quot;playerScore&quot;) &lt;= 0) {
+        return window.goToPage(&quot;lost&quot;);
+      }
+      diceAudio.play();
 
       // remove existing chidren from board and source
       sourceElem.replaceChildren();
@@ -1213,6 +627,7 @@ const critterName = draggedElem.dataset.char;
     window.addDrag(callback, checkFunc);
   })();
 &lt;/script&gt;
+
 </tw-passagedata><tw-passagedata pid="4" name="sorry" tags="" position="125,75" size="100,100">&lt;&lt;link `$left + &quot; was left behind&quot;` &quot;battle&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 
 
@@ -1228,7 +643,7 @@ document.onmousedown = (event) =&gt; {
 &lt;p&gt;Click anywhere to continue&lt;/p&gt;
 
   &lt;audio
-      src=&quot;./critters/audio/main.mp3&quot;
+      src=&quot;./critters/audio/main.m4a&quot;
       type=&quot;audio/mpeg&quot;
       autoplay
       loop
@@ -1243,6 +658,11 @@ document.onmousedown = (event) =&gt; {
 &lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;box dropzone drop-target&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;div class=&quot;flex source&quot;&gt;&lt;/div&gt;
 &lt;&lt;set $playerScore to $playerScore-2&gt;&gt;
+  &lt;audio
+      src=&quot;./critters/audio/pick.mp3&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+    &gt;&lt;/audio&gt;
 &lt;script&gt;
   (function () {
   const dropAudio =  new Audio(&quot;./critters/audio/drop.mp3&quot;);
@@ -1311,60 +731,96 @@ document.onmousedown = (event) =&gt; {
 };
 })();
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="victory" tags="" position="75,250" size="100,100">&lt;p&gt;Victory! Your energy: &lt;&lt;print $playerScore&gt;&gt;&lt;/p&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="9" name="victory" tags="" position="75,250" size="100,100">&lt;&lt;nobr&gt;&gt; 
+&lt;p&gt;Victory!&lt;/p&gt;
 &lt;div class=&#39;flex two&#39;&gt;
-&lt;&lt;button [[Recruit critter (-2 energy)-&gt;recruit]]&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;button [[Replenish points-&gt;replenish]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+	&lt;&lt;button [[Recruit critter (-2 energy)-&gt;recruit]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+	&lt;&lt;button [[Replenish points-&gt;replenish]]&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
+&lt;&lt;endnobr&gt;&gt; 
  &lt;audio
       src=&quot;./critters/audio/yay.mp3&quot;
-      type=&quot;audio/mpeg&quot;
-      autoplay
-    &gt;&lt;/audio&gt;</tw-passagedata><tw-passagedata pid="10" name="replenish" tags="" position="225,200" size="100,100">&lt;div class=&quot;content&quot;&gt;
-  &lt;p&gt;Drag a critter into the fire.&lt;/p&gt;
-  &lt;div class=&quot;flex source&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&quot;replenish&quot; class=&quot;dropzone drop-target&quot;&gt;
-  &lt;video autoplay loop src=&quot;./critters/img/fire.mp4&quot; autoplay muted&gt;&lt;/video&gt;
-&lt;/div&gt;
- &lt;audio
-      src=&quot;./critters/audio/fire.mp3&quot;
       type=&quot;audio/mpeg&quot;
       autoplay
     &gt;&lt;/audio&gt;
 &lt;script&gt;
   (function () {
-    const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
-    const { getVar, getDiceElemsGivenName, addToDice, setVarValue } =
-      window.SugarCube.setup;
-    const critterInfo = getVar(&quot;critterInfo&quot;);
-    const sacrificed = getVar(&quot;sacrificed&quot;);
-    const availableDice = getVar(&quot;availableDice&quot;);
-    //  for (let name of Object.keys(critterInfo)) {
-    for (let name of availableDice) {
-      sourceElem.appendChild(getDiceElemsGivenName(name));
-    }
-
-    function callback(_, draggedElem) {
-      const critterName = draggedElem.dataset.char;
-      setVarValue(&quot;chosen&quot;, critterName);
-      const playerScore = getVar(&quot;playerScore&quot;);
-      setVarValue(&quot;sacrificed&quot;, sacrificed.add(critterName));
-      console.log(sacrificed)
-      setVarValue(&quot;playerScore&quot;, playerScore + critterInfo[critterName].points);
-		availableDice.splice(availableDice.indexOf(critterName), 1)
-      window.goToPage(&quot;sacrifice&quot;);
-    }
-    window.addDrag(callback); 
+const batteryElem = window.SugarCube.setup.getBattery(true)
+batteryElem.style = &#39;margin: 0 auto&#39;;
+document.getElementsByTagName(&#39;p&#39;)[0].append(batteryElem)
   })();
-&lt;/script&gt;
+
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="replenish" tags="" position="225,200" size="100,100">&lt;&lt;nobr
+  &gt;&gt;
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;p&gt;Drag a critter into the fire.&lt;/p&gt;
+    &lt;div class=&quot;flex source&quot;&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;replenish&quot; class=&quot;dropzone drop-target&quot;&gt;
+    &lt;video autoplay loop src=&quot;./critters/img/fire.mp4&quot; autoplay muted&gt;&lt;/video&gt;
+  &lt;/div&gt;
+  &lt;&lt;endnobr
+    &gt;&gt;
+    &lt;audio
+      src=&quot;./critters/audio/fire.mp3&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+      loop
+    &gt;&lt;/audio&gt;
+    &lt;script&gt;
+      (function () {
+        const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
+        const { getVar, getDiceElemsGivenName, getImageFromCritterName, addToDice, setVarValue } =
+          window.SugarCube.setup;
+        const critterInfo = getVar(&quot;critterInfo&quot;);
+        const sacrificed = getVar(&quot;sacrificed&quot;);
+        const availableDice = getVar(&quot;availableDice&quot;);
+        
+//  for (let name of Object.keys(critterInfo)) {
+        for (let name of availableDice) {
+			sourceElem.appendChild( getDiceElemsGivenName(name))
+        }
+
+        for (let dice of document.getElementsByClassName(&quot;draggable&quot;)) {
+          const originalImage = dice.querySelector(&quot;.square&quot;).style.backgroundImage;
+
+          dice.addEventListener(&quot;focus&quot;, function (event) {
+            const bg = &#39;url(&quot;&#39; + critterInfo[dice.dataset.char].scaredImage + &#39;&quot;)&#39;;
+			event.target.querySelector(&quot;.square&quot;).style.backgroundImage = bg
+          });
+
+          dice.addEventListener(&quot;dragend&quot;, (event) =&gt; {
+			event.target.querySelector(&quot;.square&quot;).style.backgroundImage = originalImage;
+          });
+        }
+
+        function callback(_, draggedElem) {
+          console.log(draggedElem);
+          if (draggedElem.dataset.char === undefined) draggedElem = draggedElem.parentElement
+          const critterName = draggedElem.dataset.char;
+          if (!critterName) return
+          setVarValue(&quot;chosen&quot;, critterName);
+          const playerScore = getVar(&quot;playerScore&quot;);
+          setVarValue(&quot;sacrificed&quot;, sacrificed.add(critterName));
+          console.log(sacrificed);
+          setVarValue(
+            &quot;playerScore&quot;,
+            playerScore + critterInfo[critterName].points
+          );
+          availableDice.splice(availableDice.indexOf(critterName), 1);
+          window.goToPage(&quot;sacrifice&quot;);
+        }
+        window.addDrag(callback);
+      })();
+    &lt;/script&gt;
+  &lt;/endnobr&gt;&lt;/nobr
+&gt;
 </tw-passagedata><tw-passagedata pid="11" name="sacrifice" tags="" position="350,200" size="100,100">&lt;video id=&#39;sacrifice&#39; autoplay loop src=&quot;./critters/img/smoke.mp4&quot; autoplay muted&gt;&lt;/video&gt;
 
 &lt;div class=&quot;content&quot;&gt;
 &lt;div class=&#39;show&#39;&gt;&lt;/div&gt;
 &lt;p&gt;&lt;&lt;link `$chosen + &quot; was sacrificed&quot;` &quot;battle&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;&lt;/p&gt;
 &lt;p id=&#39;obituary&#39;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;span id=&quot;stats-str&quot;&gt;New energy: &lt;&lt;print $playerScore&gt;&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
  &lt;audio
       src=&quot;./critters/audio/gong.m4a&quot;
@@ -1376,6 +832,7 @@ document.onmousedown = (event) =&gt; {
 		const link = document.querySelector(&#39;.link-internal&#39;)
 link.textContent = window.capitalizeFirstLetter(link.textContent)
   const { getImageFromCritterName, getVar, getFieldFromCritterWithName } = window.SugarCube.setup;
+    
   const chosenCritterName = getVar(&#39;chosen&#39;)
 const   critterInfo= getVar(&#39;critterInfo&#39;)
 link.textContent += `  for ${getFieldFromCritterWithName(&#39;points&#39;, chosenCritterName)} points.`;
@@ -1392,7 +849,11 @@ document.onmousedown = (event) =&gt; {
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="12" name="help" tags="" position="650,225" size="100,100">&lt;div class=&quot;large help&quot;&gt;
   &lt;p&gt;You: [[Take me to the Mystery Man]].&lt;/p&gt;
 &lt;/div&gt;
-
+  &lt;audio
+      src=&quot;./critters/audio/scary2.mp3&quot;
+      type=&quot;audio/mpeg&quot;
+      autoplay
+    &gt;&lt;/audio&gt;
 &lt;script&gt;
   (function () {
     const helpElem = document.getElementsByClassName(&quot;help&quot;)[0];
@@ -1417,7 +878,7 @@ document.onmousedown = (event) =&gt; {
 &lt;div class=&quot;wrap&quot;&gt; &lt;div class=&quot;eye blink&quot;&gt;&lt;/div&gt;&lt;div class=&quot;eye blink&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Mystery Man: Let’s play a game. If you win I’ll leave. If you lose we’ll play again.&lt;/p&gt;
 &lt;p&gt;You: [[Okay-&gt;pick 2]]&lt;/p&gt;
-&lt;/div&gt;
+&lt;/div&gt; 
 &lt;script&gt;
 (function () {
   const arr = [&#39;Okay.&#39;, &#39;Let’s go!&#39;, &#39;Sure.&#39;, &#39;Okey dokey.&#39;]
