@@ -149,6 +149,105 @@ p {
   display: flex;
   gap: 2em;
 }
+#passage-end .source {
+  width: 670px;
+  gap: 0;
+  flex-wrap: wrap;
+  height: 100%;
+  margin-bottom: 4%;
+  justify-content: center;
+}
+#passage-replenish .source {
+  width: 600px;
+  gap: 0;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+/* tombstone */
+.stone p {
+  margin: 8px 0 0 0;
+  padding: 0;
+  --stone-width: 150px;
+  width: var(--stone-width);
+  color: white;
+  text-align: center;
+  font-size: 1em;
+}
+.stone img {
+  --padding-left: 28px;
+  width: 100px;
+  height: 100px;
+  margin: 0 0 0 var(--padding-left);
+}
+.stone {
+  --padding-left: 28px;
+  --stone-width: 160px;
+  --stone-height: 280px;
+  --base-height: 60px;
+  --base-width: 200px;
+  --stone-depth: 15px;
+  --stone-angle: 10px;
+  --base-angle: 17.5px;
+  --base-depth: 25px;
+  --stone-x-offset: calc((var(--base-width) + 10px - var(--stone-width)) / 2);
+  --stone-y-offset: 5px;
+  box-sizing: border-box;
+  padding: 40px 0 0 var(--padding-left);
+  width: calc(var(--base-width) + var(--base-angle) + var(--stone-y-offset));
+  height: calc(
+    var(--stone-height) + var(--base-height) + var(--stone-y-offset)
+  );
+  background-image: linear-gradient(#222, #222),
+    linear-gradient(
+      135deg,
+      transparent var(--stone-angle),
+      #444 var(--stone-angle)
+    ),
+    linear-gradient(
+      135deg,
+      transparent var(--stone-angle),
+      #666 var(--stone-angle)
+    ),
+    linear-gradient(
+      -45deg,
+      transparent var(--stone-angle),
+      #444 var(--stone-angle)
+    ),
+    linear-gradient(
+      -45deg,
+      transparent var(--base-angle),
+      #444 var(--base-angle)
+    ),
+    linear-gradient(
+      135deg,
+      transparent var(--base-angle),
+      #444 var(--base-angle)
+    ),
+    linear-gradient(
+      135deg,
+      transparent var(--base-angle),
+      #666 var(--base-angle)
+    ),
+    linear-gradient(#222, #222);
+  background-size: var(--stone-width) var(--stone-height),
+    var(--stone-depth) var(--stone-height),
+    calc(var(--stone-width) + var(--stone-depth)) var(--stone-depth),
+    var(--stone-depth) var(--stone-depth), var(--base-depth) var(--base-depth),
+    var(--base-depth)
+      calc(var(--base-height) + var(--stone-y-offset) - var(--base-angle)),
+    calc(var(--base-width) + var(--base-depth)) var(--base-depth),
+    var(--base-width) var(--base-height);
+  background-position: var(--stone-x-offset) var(--stone-depth),
+    calc(var(--stone-width) + var(--stone-x-offset)) 0, var(--stone-x-offset) 0,
+    calc(var(--stone-width) + var(--stone-x-offset)) var(--stone-height),
+    var(--base-width)
+      calc(var(--base-height) + var(--stone-height) - var(--base-angle)),
+    calc(var(--base-width)) calc(var(--stone-height) - var(--stone-y-offset)),
+    0 calc(var(--stone-height) - var(--stone-y-offset)),
+    0 calc(var(--stone-height) + var(--stone-depth) + var(--stone-y-offset));
+  background-repeat: no-repeat;
+}
+
 /* eye */
 .center .wrap {
   margin: 0 auto;

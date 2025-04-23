@@ -163,7 +163,7 @@ importStyles( "./critters/css/global.css").then(function () {
       image: imagePrefix + "bunny.png",
       scaredImage: imagePrefix + "bunny2.png",
       opening:
-        "The Enchanted Forest is flooded by an evil wizard! Only you can save us",
+        "The Enchanted Forest is flooded by an evil wizard! Only you can save us.",
       obituary: "She's a loving mother who's survived by 30 children.",
     },
     moose: {
@@ -175,7 +175,7 @@ importStyles( "./critters/css/global.css").then(function () {
       opening:
         "He moves at night. No plants grow where he treads. We need you to fight the Mystery Man.",
       obituary:
-        "The last in line in a family of roadkills, he finally found peace and gallops in Heaven.",
+        "The last in a family of roadkills, he finally found peace and gallops in Heaven.",
     },
     fish: {
       points: 3,
@@ -283,7 +283,6 @@ importStyles( "./critters/css/global.css").then(function () {
     const batteryElem = document.createElement("div");
     batteryElem.classList.add("battery");
     if (isHorizontal) batteryElem.classList.add("horizontal");
-    batteryElem.style = 'margin: 0 auto;'
     batteryElem.dataset.max = 15;
     batteryElem.dataset.fill = State.variables.playerScore;
     batteryElem.appendChild(document.createElement("div"));
@@ -297,7 +296,7 @@ importStyles( "./critters/css/global.css").then(function () {
     [isSmaller(5), isLarger(2)],
     [sumTo(6), isOdd()],
     [sumTo(6), isNum(2)],
-    [isLarger(2), isLarger(1), isLarger(3)],
+    [isLarger(2), sumTo(4), isSmaller(3)],
     [isNum(1), isLarger(4), isSmaller(3)],
   ];
   State.variables.challenges = [...State.variables.originalChallenges];
@@ -308,6 +307,7 @@ importStyles( "./critters/css/global.css").then(function () {
     State.variables[name];
   };
   setup.setVarValue = function (name, value) {
+    if (name === 'playerScore') value = Math.min(15, value)
     State.variables[name] = value;
   };
 
@@ -319,39 +319,63 @@ importStyles( "./critters/css/global.css").then(function () {
     State.variables.playerScore += amount;
   };
 
-  State.variables.sacrificed = new Set();
+  State.variables.sacrificed = [];
   State.variables.chosen = "";
 });
-</script><tw-passagedata pid="1" name="end" tags="" position="850,375" size="100,100">&lt;p&gt;The Mystery Man DISAPPEARED, as promised.&lt;/p&gt;
-&lt;p id=&#39;end&#39;&gt;&lt;/p&gt;
-&lt;&lt;print $sacrificed&gt;&gt;.
-&lt;div class=&#39;flex two&#39;&gt;
-&lt;&lt;button [[PLAY AGAIN-&gt;help]]&gt;&gt;&lt;&lt;/button&gt;&gt;
-&lt;&lt;button [[NO THANKS-&gt;start]]&gt;&gt;&lt;&lt;/button&gt;&gt;
- &lt;audio
-      src=&quot;./critters/audio/happyEnd.mp3&quot;
-      type=&quot;audio/mpeg&quot;
-      autoplay
-    &gt;&lt;/audio&gt;
-&lt;/div&gt;
-&lt;div class=&#39;source flex end&#39;&gt;&lt;/div&gt;
+</script><tw-passagedata pid="1" name="end" tags="" position="850,375" size="100,100">&lt;&lt;nobr&gt;&gt;
+  &lt;p&gt;The Mystery Man DISAPPEARED, as promised.&lt;/p&gt;
+  &lt;p id=&quot;end&quot;&gt;&lt;/p&gt;
+    &lt;div class=&quot;source flex end&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;flex two&quot;&gt;
+      &lt;&lt;button [[PLAY AGAIN-&gt;help]]&gt;&gt;&lt;&lt;/button&gt;&gt; &lt;&lt;button [[NO THANKS-&gt;
+        start]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+    &lt;/div&gt; 
+    &lt;&lt;endnobr&gt;&gt;
+      &lt;audio
+        src=&quot;./critters/audio/happyEnd.mp3&quot;
+        type=&quot;audio/mpeg&quot;
+        autoplay
+        loop
+      &gt;&lt;/audio&gt;
+      &lt;script&gt;
+        (function () {
+          const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
+          const { getVar, getImageFromCritterName } = window.SugarCube.setup;
+          const sacrificed = getVar(&quot;sacrificed&quot;);
+          const critterInfo = getVar(&quot;critterInfo&quot;);
+          // TODO: put on window?
+          const getPElemWithText = (text) =&gt; {
+            const pElem = document.createElement(&quot;p&quot;);
+            pElem.textContent = text;
+            return pElem;
+          };
+              console.log(&#39;sacrificed&#39;, sacrificed)
 
-&lt;script&gt;
-  (function () {
-    const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
-        const { getVar, getImageFromCritterName } =
-      window.SugarCube.setup;
-    const sacrificed = getVar(&quot;sacrificed&quot;);
-if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = &#39;Click to learn more about the sacrificed.&#39;;
-  })();
-&lt;/script&gt;
+          if (!!sacrificed.length) {
+            document.getElementById(&quot;end&quot;).textContent =
+              &quot;Click to learn more about the sacrificed.&quot;;
+            for (let crit of sacrificed) {
+            
+              const graveElem = document.createElement(&quot;div&quot;);
+              graveElem.appendChild(getImageFromCritterName(crit));
+              
+              graveElem.appendChild(getPElemWithText(window.capitalizeFirstLetter(crit)));
+              graveElem.appendChild(
+                getPElemWithText(critterInfo[crit].obituary)
+              );
+              graveElem.classList.add(&quot;stone&quot;);
+              sourceElem.appendChild(graveElem);
+            }
+          }
+        })();
+      &lt;/script&gt;
 </tw-passagedata><tw-passagedata pid="2" name="pick 2" tags="" position="350,50" size="100,100">&lt;p&gt;Drag 2 critters to join the cause.&lt;/p&gt;
 &lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;box dropzone drop-target&quot;&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;div class=&quot;flex source&quot;&gt;&lt;/div&gt;
 
-&lt;&lt;set $availableDice to $originalAvailableDice&gt;&gt;
 &lt;&lt;set $challenges to $originalChallenges&gt;&gt;
 &lt;&lt;set $playerScore to 15&gt;&gt;
+&lt;&lt;set $sacrificed to []&gt;&gt;
   &lt;audio
       src=&quot;./critters/audio/pick.mp3&quot;
       type=&quot;audio/mpeg&quot;
@@ -362,7 +386,8 @@ if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = &#39
   const dropAudio =  new Audio(&quot;./critters/audio/drop.mp3&quot;);
   const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
 
-  const {addToDice, getDiceElemsGivenName, getRandomCritterOfNum} = window.SugarCube.setup
+  const {addToDice, getDiceElemsGivenName, getVar, getRandomCritterOfNum, setVarValue} = window.SugarCube.setup
+  setVarValue(&#39;availableDice&#39;, [...getVar(&#39;originalAvailableDice&#39;)])
   const names = getRandomCritterOfNum(3)
 	for (let name of names) {
 		 sourceElem.appendChild(getDiceElemsGivenName(name));
@@ -381,254 +406,256 @@ if (!!sacrificed.size) document.getElementById(&#39;end&#39;).textContent = &#39
 
 &lt;/script&gt;
 </tw-passagedata><tw-passagedata pid="3" name="battle" tags="" position="450,450" size="100,100">&lt;&lt;nobr&gt;&gt; 
-&lt;div class=&quot;wrap&quot;&gt;
-  &lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;
-  &lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&quot;challengeZone&quot; style=&quot;margin: 4% 0;&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;flex&quot;&gt;
-  &lt;div id=&quot;battleZone&quot; class=&quot;dropzone drop-target&quot;&gt;&lt;/div&gt;
-  &lt;div&gt;&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;flex&quot;&gt;
-  &lt;div class=&quot;source&quot;&gt;&lt;/div&gt;
-  &lt;div style=&quot;width: 160px; margin: 18px 0 0 0&quot;&gt;
-    &lt;p id=&quot;diceLeft&quot;&gt;&lt;/p&gt;
-    &lt;button id=&quot;moreDice&quot;&gt;More dice (-3 energy)&lt;/button&gt;
-    &lt;button id=&quot;retry&quot;&gt;Retry (-2 energy)&lt;/button&gt;
+  &lt;div class=&quot;wrap&quot;&gt;
+    &lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;
+    &lt;div class=&quot;eye&quot;&gt;&lt;/div&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-&lt;&lt;endnobr&gt;&gt; 
-
-&lt;audio src=&quot;./critters/audio/dice.mp3&quot; type=&quot;audio/mpeg&quot; autoplay&gt;&lt;/audio&gt;
-
-&lt;script&gt;
-  (function () {
-    // add class  blink, grin, or down to eye
-    const eyesElem = document.getElementsByClassName(&quot;eye&quot;);
-    const randomEyeClass = [&quot;blink&quot;, &quot;grin&quot;, &quot;down&quot;][window.getRandomInt(3)];
-    for (let eye of eyesElem) {
-      eye.classList.add(randomEyeClass);
-    }
-
-    const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
-    const { getBattery, getDiceElemsGivenName, getVar, setVarValue } =
-      window.SugarCube.setup;
-
-    document.getElementsByClassName(&quot;flex&quot;)[0].appendChild(getBattery());
-
-    const challenges = getVar(&quot;challenges&quot;);
-    if (!challenges.length) return;
-    const challenge = challenges.shift();
-    const challengeElem = document.getElementById(&quot;challengeZone&quot;);
-    const battleZoneElem = document.getElementById(&quot;battleZone&quot;);
-
-    const getChallengeText = (arr) =&gt; {
-      let text = arr[1];
-      if (arr[0] === &quot;smaller&quot;) text = &quot;&lt; &quot; + text;
-      if (arr[0] === &quot;larger&quot;) text = &quot;&gt; &quot; + text;
-      if (arr[0] === &quot;sum&quot;) text = &quot;SUM &quot; + text;
-      return text;
-    };
-    let diceIndex = 0;
-    const batteryElem = document.getElementsByClassName(&quot;battery&quot;)[0];
-    const diceAudio = new Audio(&quot;./critters/audio/dice.mp3&quot;);
-    const updatePlayerScore = (updateNum) =&gt; {
-      let playerScore = getVar(&quot;playerScore&quot;);
-      playerScore += updateNum;
-      setVarValue(&quot;playerScore&quot;, playerScore);
-      batteryElem.dataset.fill = &quot;&quot; + playerScore;
-      window.batteryUpdate(batteryElem);
-    };
-    updatePlayerScore(0);
-    document.getElementById(&quot;retry&quot;).addEventListener(&quot;click&quot;, () =&gt; {
-      updatePlayerScore(-2);
-      if (getVar(&quot;playerScore&quot;) &lt;= 0) {
-        return window.goToPage(&quot;lost&quot;);
+  &lt;div id=&quot;challengeZone&quot; style=&quot;margin: 4% 0; height: 170px;&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;flex&quot;&gt;
+    &lt;div id=&quot;battleZone&quot; class=&quot;dropzone drop-target&quot;&gt;&lt;/div&gt;
+    &lt;div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;flex&quot;&gt;
+    &lt;div class=&quot;source&quot;&gt;&lt;/div&gt;
+    &lt;div style=&quot;width: 160px; margin: 18px 0 0 0&quot;&gt;
+      &lt;p id=&quot;diceLeft&quot;&gt;&lt;/p&gt;
+      &lt;button id=&quot;moreDice&quot;&gt;More dice (-2 energy)&lt;/button&gt;
+      &lt;button id=&quot;retry&quot;&gt;Retry (-2 energy)&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;&lt;endnobr&gt;&gt; 
+  
+  &lt;audio src=&quot;./critters/audio/dice.mp3&quot; type=&quot;audio/mpeg&quot; autoplay&gt;&lt;/audio&gt;
+  
+  &lt;script&gt;
+    (function () {
+      // add class  blink, grin, or down to eye
+      const eyesElem = document.getElementsByClassName(&quot;eye&quot;);
+      const randomEyeClass = [&quot;blink&quot;, &quot;grin&quot;, &quot;down&quot;][window.getRandomInt(3)];
+      for (let eye of eyesElem) {
+        eye.classList.add(randomEyeClass);
       }
-      diceAudio.play();
-      // clear board
-      battleZoneElem.replaceChildren();
-      sourceElem.replaceChildren();
-      challengeElem.replaceChildren();
-      for (let obs of challenge) {
-        delete obs.nums;
-      }
-      showInitialDice();
-      updateDiceLeft();
-      showChallenges();
-    });
-
-    const rollAudio = new Audio(&quot;./critters/audio/wood.m4a&quot;);
-    const tapAudio = new Audio(&quot;./critters/audio/tap.mp3&quot;);
-    const bounceAudio = new Audio(&quot;./critters/audio/bounce.mp3&quot;);
-    const hmAudio = new Audio(&quot;./critters/audio/hm.mp3&quot;);
-
-    const rollDie = (draggedElem, previousNum) =&gt; {
-      const critterName = draggedElem.dataset.char;
-      rollAudio.play();
-      let randomInt = critters[critterName].roll();
-      while (randomInt == previousNum) {
-        randomInt = critters[critterName].roll();
-      }
-      draggedElem.dataset.value = randomInt;
-      draggedElem.focus();
-      setBackgroundImageToDice(draggedElem.querySelector(&quot;.child&quot;), randomInt);
-    };
-    const critters = getVar(&quot;critterInfo&quot;);
-    function callback(dropElem, draggedElem) {
-      if (!dropElem || !draggedElem) return;
-      if (dropElem.id === &quot;battleZone&quot;) {
-        rollDie(draggedElem);
-        // re-roll dice in front
-        if (draggedElem.dataset.char === &quot;crow&quot;) {
-          if (battleZoneElem.children.length &gt; 1) {
-            // get second last dice, since last dice is crow
-            const lastDie =
-              battleZoneElem.children[battleZoneElem.children.length - 2];
-            setTimeout(() =&gt; rollDie(lastDie, lastDie.dataset.value), 500);
-          }
+  
+      const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
+      const { getBattery, getDiceElemsGivenName, getVar, setVarValue } =
+        window.SugarCube.setup;
+  
+      document.getElementsByClassName(&quot;flex&quot;)[0].appendChild(getBattery());
+  
+      const challenges = getVar(&quot;challenges&quot;);
+      if (!challenges.length) return;
+      const challenge = challenges.shift();
+      const challengeElem = document.getElementById(&quot;challengeZone&quot;);
+      const battleZoneElem = document.getElementById(&quot;battleZone&quot;);
+  
+      const getChallengeText = (arr) =&gt; {
+        let text = arr[1];
+        if (arr[0] === &quot;smaller&quot;) text = &quot;&lt; &quot; + text;
+        if (arr[0] === &quot;larger&quot;) text = &quot;&gt; &quot; + text;
+        if (arr[0] === &quot;sum&quot;) text = &quot;SUM &quot; + text;
+        return text;
+      };
+      let diceIndex = 0;
+      const batteryElem = document.getElementsByClassName(&quot;battery&quot;)[0];
+      const diceAudio = new Audio(&quot;./critters/audio/dice.mp3&quot;);
+      const updatePlayerScore = (updateNum) =&gt; {
+        let playerScore = getVar(&quot;playerScore&quot;);
+        playerScore += updateNum;
+        setVarValue(&quot;playerScore&quot;, playerScore);
+        batteryElem.dataset.fill = &quot;&quot; + playerScore;
+        window.batteryUpdate(batteryElem);
+      };
+      updatePlayerScore(0);
+      document.getElementById(&quot;retry&quot;).addEventListener(&quot;click&quot;, () =&gt; {
+        updatePlayerScore(-2);
+        if (getVar(&quot;playerScore&quot;) &lt;= 0) {
+          return window.goToPage(&quot;lost&quot;);
         }
-      } else {
-        // challenge zone
-        const currChallenge = challenge[parseInt(dropElem.dataset.index, 10)];
-
-        if (currChallenge.display[0] === &quot;sum&quot;) {
-          const remainder = currChallenge.remainder(
+        diceAudio.play();
+        // clear board
+        battleZoneElem.replaceChildren();
+        sourceElem.replaceChildren();
+        challengeElem.replaceChildren();
+        for (let obs of challenge) {
+          delete obs.nums;
+        }
+        showInitialDice();
+        updateDiceLeft();
+        showChallenges();
+      });
+  
+      const rollAudio = new Audio(&quot;./critters/audio/wood.m4a&quot;);
+      const tapAudio = new Audio(&quot;./critters/audio/tap.mp3&quot;);
+      const bounceAudio = new Audio(&quot;./critters/audio/bounce.mp3&quot;);
+      const hmAudio = new Audio(&quot;./critters/audio/hm.mp3&quot;);
+  
+      const rollDie = (draggedElem, previousNum) =&gt; {
+        const critterName = draggedElem.dataset.char;
+        rollAudio.play();
+        let randomInt = critters[critterName].roll();
+        while (randomInt == previousNum) {
+          randomInt = critters[critterName].roll();
+        }
+        draggedElem.dataset.value = randomInt;
+        draggedElem.focus();
+        setBackgroundImageToDice(draggedElem.querySelector(&quot;.child&quot;), randomInt);
+      };
+      const critters = getVar(&quot;critterInfo&quot;);
+      function callback(dropElem, draggedElem) {
+        if (!dropElem || !draggedElem) return;
+        if (dropElem.id === &quot;battleZone&quot;) {
+          if (draggedElem.dataset.char)rollDie(draggedElem);
+          else return false
+          
+          // re-roll dice in front
+          if (draggedElem.dataset.char === &quot;crow&quot;) {
+            if (battleZoneElem.children.length &gt; 1) {
+              // get second last dice, since last dice is crow
+              const lastDie =
+                battleZoneElem.children[battleZoneElem.children.length - 2];
+              setTimeout(() =&gt; rollDie(lastDie, lastDie.dataset.value), 500);
+            }
+          }
+        } else {
+          // challenge zone
+          const currChallenge = challenge[parseInt(dropElem.dataset.index, 10)];
+  
+          if (currChallenge.display[0] === &quot;sum&quot;) {
+            const remainder = currChallenge.remainder(
+              currChallenge.display[1],
+              currChallenge.nums
+            );
+            if (remainder &gt; 0) {
+              dropElem.textContent = remainder;
+              hmAudio.play();
+              return;
+            }
+          }
+          // remove obstacle
+          challengeElem.removeChild(
+            challengeElem.querySelector(
+              &#39;[data-index=&quot;&#39; + dropElem.dataset.index + &#39;&quot;]&#39;
+            )
+          );
+          tapAudio.play();
+          setTimeout(() =&gt; {
+            if (challengeElem.children.length === 0) {
+              if (!challenges.length) {
+                window.goToPage(&quot;end&quot;);
+              } else {
+                window.goToPage(&quot;victory&quot;);
+              }
+            }
+          }, 500);
+        }
+      }
+  
+      const checkFunc = (draggedElem, challengeElem) =&gt; {
+        if (!draggedElem) return;
+        if (challengeElem.parentElement.id === &quot;challengeZone&quot;) {
+          // directly from source to challenge
+          if (draggedElem &amp;&amp; typeof draggedElem.dataset.value === undefined) {
+            alert(&quot;Please roll the dice first by dragging it onto the table&quot;);
+            return false;
+          }
+          // for sum: update challenge with array
+          const currChallenge = challenge[challengeElem.dataset.index];
+          if (currChallenge.display[0] === &quot;sum&quot;) {
+            if (currChallenge.nums === undefined) currChallenge.nums = [];
+            currChallenge.nums.push(parseInt(draggedElem.dataset.value, 10));
+          }
+          console.log(
+            &quot;current challenge&quot;,
+            currChallenge,
+            currChallenge.solver,
+            currChallenge.display[1]
+          );
+          const bool = currChallenge.solver(
+            parseInt(draggedElem.dataset.value, 10),
             currChallenge.display[1],
             currChallenge.nums
           );
-          if (remainder &gt; 0) {
-            dropElem.textContent = remainder;
-            hmAudio.play();
-            return;
+          if (bool === true) {
+            // play some sfx
+          } else {
+            bounceAudio.play();
           }
+          return bool;
         }
-        // remove obstacle
-        challengeElem.removeChild(
-          challengeElem.querySelector(
-            &#39;[data-index=&quot;&#39; + dropElem.dataset.index + &#39;&quot;]&#39;
-          )
-        );
-        tapAudio.play();
-        setTimeout(() =&gt; {
-          if (challengeElem.children.length === 0) {
-            if (!challenges.length) {
-              window.goToPage(&quot;end&quot;);
-            } else {
-              window.goToPage(&quot;victory&quot;);
-            }
+        return true;
+      };
+  
+      const setBackgroundImageToDice = (elem, num) =&gt; {
+        elem.style.backgroundImage =
+          &quot;url(&#39;./critters/img/dice/die&quot; + num + &quot;.png&#39;)&quot;;
+        elem.style.backgroundSize = &quot;cover&quot;;
+      };
+      const showChallenges = () =&gt; {
+        challenge.forEach((ch, index) =&gt; {
+          const { display } = ch;
+          const divElem = document.createElement(&quot;div&quot;);
+          if (display[0] === &quot;is&quot; &amp;&amp; typeof display[1] === &quot;number&quot;) {
+            setBackgroundImageToDice(divElem, display[1]);
+          } else {
+            divElem.textContent = getChallengeText(display);
           }
-        }, 500);
-      }
-    }
-
-    const checkFunc = (draggedElem, challengeElem) =&gt; {
-      if (!draggedElem) return;
-      if (challengeElem.parentElement.id === &quot;challengeZone&quot;) {
-        // directly from source to challenge
-        if (draggedElem &amp;&amp; typeof draggedElem.dataset.value === undefined) {
-          alert(&quot;Please roll the dice first by dragging it onto the table&quot;);
-          return false;
+          divElem.classList.add(&quot;dropzone&quot;);
+          divElem.dataset.index = index;
+          divElem.classList.add(&quot;drop-target&quot;);
+          challengeElem.appendChild(divElem);
+          window.addDrag(callback, checkFunc);
+        });
+      };
+      showChallenges();
+  
+      const availableDice = [...getVar(&quot;availableDice&quot;)]; //Object.keys(critters); //[&#39;crow&#39;, &#39;crow&#39;, &#39;crow&#39;]
+      window.shuffleArray(availableDice);
+  
+      const showInitialDice = () =&gt; {
+        diceIndex = 0;
+        while (diceIndex &lt; Math.min(availableDice.length, 3)) {
+          sourceElem.appendChild(getDiceElemsGivenName(availableDice[diceIndex]));
+          diceIndex++;
         }
-        // for sum: update challenge with array
-        const currChallenge = challenge[challengeElem.dataset.index];
-        if (currChallenge.display[0] === &quot;sum&quot;) {
-          if (currChallenge.nums === undefined) currChallenge.nums = [];
-          currChallenge.nums.push(parseInt(draggedElem.dataset.value, 10));
-        }
-        console.log(
-          &quot;current challenge&quot;,
-          currChallenge,
-          currChallenge.solver,
-          currChallenge.display[1]
-        );
-        const bool = currChallenge.solver(
-          parseInt(draggedElem.dataset.value, 10),
-          currChallenge.display[1],
-          currChallenge.nums
-        );
-        if (bool === true) {
-          // play some sfx
-        } else {
-          bounceAudio.play();
-        }
-        return bool;
-      }
-      return true;
-    };
-
-    const setBackgroundImageToDice = (elem, num) =&gt; {
-      elem.style.backgroundImage =
-        &quot;url(&#39;./critters/img/dice/die&quot; + num + &quot;.png&#39;)&quot;;
-      elem.style.backgroundSize = &quot;cover&quot;;
-    };
-    const showChallenges = () =&gt; {
-      challenge.forEach((ch, index) =&gt; {
-        const { display } = ch;
-        const divElem = document.createElement(&quot;div&quot;);
-        if (display[0] === &quot;is&quot; &amp;&amp; typeof display[1] === &quot;number&quot;) {
-          setBackgroundImageToDice(divElem, display[1]);
-        } else {
-          divElem.textContent = getChallengeText(display);
-        }
-        divElem.classList.add(&quot;dropzone&quot;);
-        divElem.dataset.index = index;
-        divElem.classList.add(&quot;drop-target&quot;);
-        challengeElem.appendChild(divElem);
-        window.addDrag(callback, checkFunc);
-      });
-    };
-    showChallenges();
-
-    const availableDice = [...getVar(&quot;availableDice&quot;)]; //Object.keys(critters); //[&#39;crow&#39;, &#39;crow&#39;, &#39;crow&#39;]
-    window.shuffleArray(availableDice);
-
-    const showInitialDice = () =&gt; {
-      diceIndex = 0;
-      while (diceIndex &lt; Math.min(availableDice.length, 3)) {
-        sourceElem.appendChild(getDiceElemsGivenName(availableDice[diceIndex]));
-        diceIndex++;
-      }
-    };
-    showInitialDice();
-
-    const moreDiceElem = document.getElementById(&quot;moreDice&quot;);
-    const updateDiceLeft = () =&gt; {
-      document.getElementById(&quot;diceLeft&quot;).textContent = `Dice left: ${
-        availableDice.length - diceIndex
-      }`;
-      moreDiceElem.disabled = availableDice.length &lt;= diceIndex;
-    };
-    updateDiceLeft();
-
-    moreDiceElem.addEventListener(&quot;click&quot;, (e) =&gt; {
-      updatePlayerScore(-3);
-      if (getVar(&quot;playerScore&quot;) &lt;= 0) {
-        return window.goToPage(&quot;lost&quot;);
-      }
-      diceAudio.play();
-
-      // remove existing chidren from board and source
-      sourceElem.replaceChildren();
-      battleZoneElem.replaceChildren();
-      const limit = diceIndex + 3;
-      while (diceIndex &lt; Math.min(availableDice.length, limit)) {
-        sourceElem.appendChild(getDiceElemsGivenName(availableDice[diceIndex]));
-        diceIndex++;
-        // add event listeners to newly added sources
-        window.addDrag(callback, checkFunc);
-      }
-
-      moreDiceElem.disabled = getVar(&quot;availableDice&quot;).length &lt;= diceIndex;
+      };
+      showInitialDice();
+  
+      const moreDiceElem = document.getElementById(&quot;moreDice&quot;);
+      const updateDiceLeft = () =&gt; {
+        document.getElementById(&quot;diceLeft&quot;).textContent = `Dice left: ${
+          availableDice.length - diceIndex
+        }`;
+        moreDiceElem.disabled = availableDice.length &lt;= diceIndex;
+      };
       updateDiceLeft();
-    });
-
-    window.addDrag(callback, checkFunc);
-  })();
-&lt;/script&gt;
-
-</tw-passagedata><tw-passagedata pid="4" name="sorry" tags="" position="125,75" size="100,100">&lt;&lt;link `$left + &quot; was left behind&quot;` &quot;battle&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
+  
+      moreDiceElem.addEventListener(&quot;click&quot;, (e) =&gt; {
+        updatePlayerScore(-2);
+        if (getVar(&quot;playerScore&quot;) &lt;= 0) {
+          return window.goToPage(&quot;lost&quot;);
+        }
+        diceAudio.play();
+  
+        // remove existing chidren from board and source
+        sourceElem.replaceChildren();
+        battleZoneElem.replaceChildren();
+        const limit = diceIndex + 3;
+        while (diceIndex &lt; Math.min(availableDice.length, limit)) {
+          sourceElem.appendChild(getDiceElemsGivenName(availableDice[diceIndex]));
+          diceIndex++;
+          // add event listeners to newly added sources
+          window.addDrag(callback, checkFunc);
+        }
+  
+        moreDiceElem.disabled = getVar(&quot;availableDice&quot;).length &lt;= diceIndex;
+        updateDiceLeft();
+      });
+  
+      window.addDrag(callback, checkFunc);
+    })();
+  &lt;/script&gt;
+  
+  </tw-passagedata><tw-passagedata pid="4" name="sorry" tags="" position="125,75" size="100,100">&lt;&lt;link `$left + &quot; was left behind&quot;` &quot;battle&quot;&gt;&gt;&lt;&lt;/link&gt;&gt;
 
 
 &lt;script&gt;
@@ -735,7 +762,7 @@ document.onmousedown = (event) =&gt; {
 &lt;p&gt;Victory!&lt;/p&gt;
 &lt;div class=&#39;flex two&#39;&gt;
 	&lt;&lt;button [[Recruit critter (-2 energy)-&gt;recruit]]&gt;&gt;&lt;&lt;/button&gt;&gt;
-	&lt;&lt;button [[Replenish points-&gt;replenish]]&gt;&gt;&lt;&lt;/button&gt;&gt;
+	&lt;&lt;button [[Replenish energy (max 15)-&gt;replenish]]&gt;&gt;&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;endnobr&gt;&gt; 
  &lt;audio
@@ -750,17 +777,16 @@ batteryElem.style = &#39;margin: 0 auto&#39;;
 document.getElementsByTagName(&#39;p&#39;)[0].append(batteryElem)
   })();
 
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="replenish" tags="" position="225,200" size="100,100">&lt;&lt;nobr
-  &gt;&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="10" name="replenish" tags="" position="225,200" size="100,100">&lt;&lt;nobr&gt;&gt;
   &lt;div class=&quot;content&quot;&gt;
     &lt;p&gt;Drag a critter into the fire.&lt;/p&gt;
+    &lt;p&gt;Its points determine your energy increase.&lt;/p&gt;
     &lt;div class=&quot;flex source&quot;&gt;&lt;/div&gt;
   &lt;/div&gt;
   &lt;div id=&quot;replenish&quot; class=&quot;dropzone drop-target&quot;&gt;
     &lt;video autoplay loop src=&quot;./critters/img/fire.mp4&quot; autoplay muted&gt;&lt;/video&gt;
   &lt;/div&gt;
-  &lt;&lt;endnobr
-    &gt;&gt;
+  &lt;&lt;endnobr&gt;&gt;
     &lt;audio
       src=&quot;./critters/audio/fire.mp3&quot;
       type=&quot;audio/mpeg&quot;
@@ -770,39 +796,47 @@ document.getElementsByTagName(&#39;p&#39;)[0].append(batteryElem)
     &lt;script&gt;
       (function () {
         const sourceElem = document.getElementsByClassName(&quot;source&quot;)[0];
-        const { getVar, getDiceElemsGivenName, getImageFromCritterName, addToDice, setVarValue } =
-          window.SugarCube.setup;
+        const {
+          setVarValue,
+          getVar,
+          getDiceElemsGivenName,
+          getImageFromCritterName,
+          addToDice,
+        } = window.SugarCube.setup;
+        setVarValue(&quot;oldPlayerScore&quot;, getVar(&quot;playerScore&quot;));
         const critterInfo = getVar(&quot;critterInfo&quot;);
         const sacrificed = getVar(&quot;sacrificed&quot;);
         const availableDice = getVar(&quot;availableDice&quot;);
-        
-//  for (let name of Object.keys(critterInfo)) {
+
+        //  for (let name of Object.keys(critterInfo)) {
         for (let name of availableDice) {
-			sourceElem.appendChild( getDiceElemsGivenName(name))
+          sourceElem.appendChild(getDiceElemsGivenName(name));
         }
 
         for (let dice of document.getElementsByClassName(&quot;draggable&quot;)) {
-          const originalImage = dice.querySelector(&quot;.square&quot;).style.backgroundImage;
+          const originalImage =
+            dice.querySelector(&quot;.square&quot;).style.backgroundImage;
 
           dice.addEventListener(&quot;focus&quot;, function (event) {
-            const bg = &#39;url(&quot;&#39; + critterInfo[dice.dataset.char].scaredImage + &#39;&quot;)&#39;;
-			event.target.querySelector(&quot;.square&quot;).style.backgroundImage = bg
+            const bg =
+              &#39;url(&quot;&#39; + critterInfo[dice.dataset.char].scaredImage + &#39;&quot;)&#39;;
+            event.target.querySelector(&quot;.square&quot;).style.backgroundImage = bg;
           });
 
           dice.addEventListener(&quot;dragend&quot;, (event) =&gt; {
-			event.target.querySelector(&quot;.square&quot;).style.backgroundImage = originalImage;
+            event.target.querySelector(&quot;.square&quot;).style.backgroundImage =
+              originalImage;
           });
         }
 
         function callback(_, draggedElem) {
-          console.log(draggedElem);
-          if (draggedElem.dataset.char === undefined) draggedElem = draggedElem.parentElement
+          if (draggedElem.dataset.char === undefined)
+            draggedElem = draggedElem.parentElement;
           const critterName = draggedElem.dataset.char;
-          if (!critterName) return
+          if (!critterName) return;
           setVarValue(&quot;chosen&quot;, critterName);
           const playerScore = getVar(&quot;playerScore&quot;);
-          setVarValue(&quot;sacrificed&quot;, sacrificed.add(critterName));
-          console.log(sacrificed);
+          sacrificed.push(critterName)
           setVarValue(
             &quot;playerScore&quot;,
             playerScore + critterInfo[critterName].points
@@ -813,8 +847,6 @@ document.getElementsByTagName(&#39;p&#39;)[0].append(batteryElem)
         window.addDrag(callback);
       })();
     &lt;/script&gt;
-  &lt;/endnobr&gt;&lt;/nobr
-&gt;
 </tw-passagedata><tw-passagedata pid="11" name="sacrifice" tags="" position="350,200" size="100,100">&lt;video id=&#39;sacrifice&#39; autoplay loop src=&quot;./critters/img/smoke.mp4&quot; autoplay muted&gt;&lt;/video&gt;
 
 &lt;div class=&quot;content&quot;&gt;
@@ -835,7 +867,7 @@ link.textContent = window.capitalizeFirstLetter(link.textContent)
     
   const chosenCritterName = getVar(&#39;chosen&#39;)
 const   critterInfo= getVar(&#39;critterInfo&#39;)
-link.textContent += `  for ${getFieldFromCritterWithName(&#39;points&#39;, chosenCritterName)} points.`;
+link.textContent += `  for ${getVar(&#39;playerScore&#39;) - getVar(&#39;oldPlayerScore&#39;)} points.`;
   if (chosenCritterName) {
   document.getElementsByClassName(&#39;show&#39;)[0].prepend(getImageFromCritterName(chosenCritterName));
   document.getElementById(&#39;obituary&#39;).textContent = critterInfo[chosenCritterName].obituary;
