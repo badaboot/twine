@@ -212,10 +212,10 @@ importStyles( "./critters/css/global.css").then(function () {
     crow: {
       points: 5,
       roll: () => getDiceRoll(),
-      special: "Rolls 1-6. Re-rolls dice in front",
+      special: "Rolls 1-6. Re-rolls die in front",
       image: imagePrefix + "crow.png",
       scaredImage: imagePrefix + "crow2.png",
-      opening: "CAW CAW CAW! Mystery Man set the Enchanted Forest ON FIRE!",
+      opening: "CAW CAW CAW! Mystery Man lit the Enchanted Forest ON FIRE!",
       obituary: "Master hoarder left behind a tree full of shiny trinkets.",
     },
   };
@@ -231,10 +231,10 @@ importStyles( "./critters/css/global.css").then(function () {
       : "";
   };
 
-  setup.getImageFromCritterName = (name) => {
+  setup.getImageFromCritterName = (name, isScared) => {
     const img = document.createElement("img");
     img.classList.add("blockImage");
-    img.src = State.variables.critterInfo[name].image;
+    img.src = isScared ?  State.variables.critterInfo[name].scaredImage : State.variables.critterInfo[name].image;
     return img;
   };
 
@@ -349,11 +349,10 @@ importStyles( "./critters/css/global.css").then(function () {
             pElem.textContent = text;
             return pElem;
           };
-              console.log(&#39;sacrificed&#39;, sacrificed)
 
           if (!!sacrificed.length) {
             document.getElementById(&quot;end&quot;).textContent =
-              &quot;Click to learn more about the sacrificed.&quot;;
+              &quot;The sacrifices were:&quot;;
             for (let crit of sacrificed) {
             
               const graveElem = document.createElement(&quot;div&quot;);
@@ -659,11 +658,14 @@ importStyles( "./critters/css/global.css").then(function () {
 
 
 &lt;script&gt;
+        (function () {
 document.onmousedown = (event) =&gt; {
 		const link = document.querySelector(&#39;.link-internal&#39;)
     if (link) link.click()
 }
-&lt;/script&gt;</tw-passagedata><tw-passagedata pid="5" name="start" tags="" position="650,50" size="100,100">&lt;a data-passage=&quot;help&quot; class=&quot;link-internal link-image&quot;&gt;
+        })();
+&lt;/script&gt;
+</tw-passagedata><tw-passagedata pid="5" name="start" tags="" position="650,50" size="100,100">&lt;a data-passage=&quot;help&quot; class=&quot;link-internal link-image&quot;&gt;
 	&lt;img  class=&#39;blockImage&#39; src=&#39;./critters/img/logo.png&#39; &gt;
 &lt;/a&gt;
 
@@ -676,10 +678,12 @@ document.onmousedown = (event) =&gt; {
       loop
     &gt;&lt;/audio&gt;
 &lt;script&gt;
+        (function () {
 document.onmousedown = (event) =&gt; {
 	const link = document.querySelector(&#39;.link-internal&#39;)
     if (link) link.click()
 }
+        })();
 &lt;/script&gt;
 </tw-passagedata><tw-passagedata pid="6" name="recruit" tags="" position="225,325" size="100,100">&lt;p&gt;Drag a critter into the hole.&lt;/p&gt;
 &lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;box dropzone drop-target&quot;&gt;&lt;/div&gt;&lt;/div&gt;
@@ -863,13 +867,13 @@ document.getElementsByTagName(&#39;p&#39;)[0].append(batteryElem)
 (function () {
 		const link = document.querySelector(&#39;.link-internal&#39;)
 link.textContent = window.capitalizeFirstLetter(link.textContent)
-  const { getImageFromCritterName, getVar, getFieldFromCritterWithName } = window.SugarCube.setup;
+  const { getImageFromCritterName, getVar } = window.SugarCube.setup;
     
   const chosenCritterName = getVar(&#39;chosen&#39;)
 const   critterInfo= getVar(&#39;critterInfo&#39;)
 link.textContent += `  for ${getVar(&#39;playerScore&#39;) - getVar(&#39;oldPlayerScore&#39;)} points.`;
   if (chosenCritterName) {
-  document.getElementsByClassName(&#39;show&#39;)[0].prepend(getImageFromCritterName(chosenCritterName));
+  document.getElementsByClassName(&#39;show&#39;)[0].prepend(getImageFromCritterName(chosenCritterName, true));
   document.getElementById(&#39;obituary&#39;).textContent = critterInfo[chosenCritterName].obituary;
   }
   
