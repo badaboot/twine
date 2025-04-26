@@ -292,12 +292,16 @@ importStyles( "./critters/css/global.css").then(function () {
   State.variables.originalAvailableDice = ["bunny", "bunny", "bunny"];
   State.variables.availableDice = [...State.variables.originalAvailableDice];
   State.variables.originalChallenges = [
+    /*
     [isEven()],
     [isSmaller(5), isLarger(2)],
+    */
     [sumTo(6), isOdd()],
     [sumTo(6), isNum(2)],
+    /*
     [isLarger(2), sumTo(4), isSmaller(3)],
     [isNum(1), isLarger(4), isSmaller(3)],
+    */
   ];
   State.variables.challenges = [...State.variables.originalChallenges];
   setup.getVar = function (name) {
@@ -451,7 +455,7 @@ importStyles( "./critters/css/global.css").then(function () {
         let text = arr[1];
         if (arr[0] === &quot;smaller&quot;) text = &quot;&lt; &quot; + text;
         if (arr[0] === &quot;larger&quot;) text = &quot;&gt; &quot; + text;
-        if (arr[0] === &quot;sum&quot;) text = &quot;SUM &quot; + text;
+        if (arr[0] === &quot;sum&quot;) text = &quot;SUM &gt;= &quot; + text;
         return text;
       };
       let diceIndex = 0;
@@ -525,7 +529,7 @@ importStyles( "./critters/css/global.css").then(function () {
               currChallenge.nums
             );
             if (remainder &gt; 0) {
-              dropElem.textContent = remainder;
+              dropElem.textContent = &#39;SUM &gt;= &#39; + remainder;
               hmAudio.play();
               return;
             }
@@ -668,8 +672,27 @@ document.onmousedown = (event) =&gt; {
 </tw-passagedata><tw-passagedata pid="5" name="start" tags="" position="650,50" size="100,100">&lt;a data-passage=&quot;help&quot; class=&quot;link-internal link-image&quot;&gt;
 	&lt;img  class=&#39;blockImage&#39; src=&#39;./critters/img/logo.png&#39; &gt;
 &lt;/a&gt;
+&lt;p class=&#39;small&#39;&gt;Click on the image to proceed&lt;/p&gt;
+&lt;details class=&#39;credit&#39;&gt;
+  &lt;summary&gt;Credits&lt;/summary&gt;
+  &lt;&lt;nobr&gt;&gt;
+  &lt;ol&gt;
+  &lt;li&gt;Drawings and game development by badaboot&lt;/li&gt;
+&lt;li&gt;Main Sound Effect by &lt;a href=&quot;https://pixabay.com/users/samuelfjohanns-1207793&quot;&gt;Samuel F. Johanns&lt;/a&gt; from Pixabay &lt;/li&gt;
+&lt;li&gt;Pick Sound Effect by &lt;a href=&quot;https://pixabay.com/users/universfield-28281460&quot;&gt;Universfield&lt;/a&gt; from Pixabay &lt;/li&gt;
+&lt;li&gt;Dice Sound Effect by &lt;a href=&quot;https://pixabay.com/users/u_qpfzpydtro-29496424&quot;&gt;u_qpfzpydtro&lt;/a&gt; from Pixabay &lt;/li&gt;
+&lt;li&gt;End screen woman singing Sound Effect by &lt;a href=&quot;https://pixabay.com/users/samuelfjohanns-1207793&quot;&gt;Samuel F. Johanns&lt;/a&gt; from Pixabay &lt;/li&gt;
+&lt;li&gt;Fire Sound Effect by &lt;a href=&quot;https://pixabay.com/users/storegraphic-49061086&quot;&gt;storegraphic&lt;/a&gt; from Pixabay &lt;/li&gt;
+&lt;li&gt;Gong Sound Effect by &lt;a href=&quot;https://pixabay.com/users/alban_gogh-28413822&quot;&gt;Alban_Gogh&lt;/a&gt; from Pixabay &lt;/li&gt;
+&lt;li&gt;&lt;a href=&#39;https://pixabay.com/videos/fire-burn-flame-hot-heat-glow-21531/&#39;&gt;Fire video &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#39;https://cdn.pixabay.com/video/2016/05/08/3068-165796695_large.mp4&#39;&gt;Smoke video&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#39;https://www.istockphoto.com/photo/wood-texture-background-top-view-of-vintage-wooden-table-with-cracks-surface-of-old-gm2162944052-583313132&#39;&gt;Wooden table image &lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#39;https://pixabay.com/sound-effects/mega-bass-sub-drop-effect-240472/&#39;&gt;Bass drop sound effect&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Sum hmm Sound Effect, click sound on wooden table Sound Effect by &lt;a href=&quot;https://pixabay.com/users/freesound_community-46691455&quot;&gt;freesound_community&lt;/a&gt; from Pixabay &lt;/li&gt;
 
-&lt;p&gt;Click anywhere to continue&lt;/p&gt;
+&lt;/ol&gt;
+  &lt;&lt;endnobr&gt;&gt;
+  &lt;/details&gt;
 
   &lt;audio
       src=&quot;./critters/audio/main.m4a&quot;
@@ -677,13 +700,7 @@ document.onmousedown = (event) =&gt; {
       autoplay
       loop
     &gt;&lt;/audio&gt;
-&lt;script&gt;
-        (function () {
-document.onmousedown = (event) =&gt; {
-	const link = document.querySelector(&#39;.link-internal&#39;)
-    if (link) link.click()
-}
-        })();
+&lt;script&gt; 
 &lt;/script&gt;
 </tw-passagedata><tw-passagedata pid="6" name="recruit" tags="" position="225,325" size="100,100">&lt;p&gt;Drag a critter into the hole.&lt;/p&gt;
 &lt;div class=&quot;container&quot;&gt;&lt;div class=&quot;box dropzone drop-target&quot;&gt;&lt;/div&gt;&lt;/div&gt;
@@ -884,6 +901,8 @@ document.onmousedown = (event) =&gt; {
 
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="12" name="help" tags="" position="650,225" size="100,100">&lt;div class=&quot;large help&quot;&gt;
   &lt;p&gt;You: [[Take me to the Mystery Man]].&lt;/p&gt;
+&lt;p class=&#39;small&#39;&gt;Click anywhere to continue&lt;/p&gt;
+  
 &lt;/div&gt;
   &lt;audio
       src=&quot;./critters/audio/scary2.mp3&quot;
