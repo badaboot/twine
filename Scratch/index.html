@@ -292,12 +292,16 @@ importStyles( "./critters/css/global.css").then(function () {
   State.variables.originalAvailableDice = ["bunny", "bunny", "bunny"];
   State.variables.availableDice = [...State.variables.originalAvailableDice];
   State.variables.originalChallenges = [
+    /*
     [isEven()],
     [isSmaller(5), isLarger(2)],
+    */
     [sumTo(6), isOdd()],
     [sumTo(6), isNum(2)],
+    /*
     [isLarger(2), sumTo(4), isSmaller(3)],
     [isNum(1), isLarger(4), isSmaller(3)],
+    */
   ];
   State.variables.challenges = [...State.variables.originalChallenges];
   setup.getVar = function (name) {
@@ -451,7 +455,7 @@ importStyles( "./critters/css/global.css").then(function () {
         let text = arr[1];
         if (arr[0] === &quot;smaller&quot;) text = &quot;&lt; &quot; + text;
         if (arr[0] === &quot;larger&quot;) text = &quot;&gt; &quot; + text;
-        if (arr[0] === &quot;sum&quot;) text = &quot;SUM &quot; + text;
+        if (arr[0] === &quot;sum&quot;) text = &quot;SUM &gt;= &quot; + text;
         return text;
       };
       let diceIndex = 0;
@@ -525,7 +529,7 @@ importStyles( "./critters/css/global.css").then(function () {
               currChallenge.nums
             );
             if (remainder &gt; 0) {
-              dropElem.textContent = remainder;
+              dropElem.textContent = &#39;SUM &gt;= &#39; + remainder;
               hmAudio.play();
               return;
             }
